@@ -2,8 +2,13 @@ import React from "react";
 import "./App.css";
 import routes from "./routes";
 
-function App() {
-  return <div className="app">{routes}</div>;
-}
+import Nav from "./Components/Nav/Nav";
 
-export default App;
+export default () => {
+  return (
+    <div className="app">
+      <Nav />
+      {routes}
+    </div>
+  );
+};
