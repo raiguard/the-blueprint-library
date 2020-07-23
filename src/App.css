@@ -1,38 +1,37 @@
-.App {
-  text-align: center;
+@font-face {
+  font-family: TitilliumWeb;
+  src: url(fonts\\TitilliumWeb-Bold.ttf);
+  font-weight: 700;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+@font-face {
+  font-family: TitilliumWeb;
+  src: url(fonts\\TitilliumWeb-Regular.ttf);
+  font-weight: 400;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+@font-face {
+  font-family: TitilliumWeb;
+  src: url(fonts\\TitilliumWeb-SemiBold.ttf);
+  font-weight: 500;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+:root {
+  --main-background-color: #313031;
+  --main-font-color: #ffffff;
+  --bold-font-color: #ffe6c0;
+}
+
+.app {
+  background-color: #313031;
+  color: var(--bold-font-color);
+  font-family: TitilliumWeb;
+  font-weight: 500;
+  font-size: 1.25rem;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  align-items: center;
+  height: 100vh;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
 }
