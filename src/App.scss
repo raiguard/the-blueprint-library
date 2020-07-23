@@ -1,5 +1,3 @@
-@import "./Components/Nav/Nav.scss";
-
 @font-face {
   font-family: TitilliumWeb;
   src: url(fonts\\TitilliumWeb-Bold.ttf);
@@ -19,10 +17,12 @@
 }
 
 $main-background-color: #313031;
-$main-font-color: #ffffff;
+$toolbar-background-color: #242324;
 $main-font-family: TitilliumWeb;
 
-$toolbar-background-color: #242324;
+%main-font {
+  color: #ffffff;
+}
 
 %bold-font {
   color: #ffe6c0;
@@ -30,14 +30,12 @@ $toolbar-background-color: #242324;
 }
 
 .app {
-  @extend %bold-font;
+  @extend %main-font;
   background-color: $main-background-color;
   font-family: $main-font-family;
-  font-size: 1.25rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  min-height: 100vh;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
 }
+
+@import "./Components/Nav/Nav";

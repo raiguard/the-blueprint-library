@@ -3,14 +3,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { setUser } from "../../redux/reducer";
 
 export default () => {
-  const userData = useSelector((state) => state.user);
   const dispatch = useDispatch();
+  const userData = useSelector((state) => state.user);
 
   return (
-    <div>
-      {console.log(userData)}
+    <nav>
       <p>{userData.username}</p>
-      <button onClick={() => dispatch(setUser({ username: "Fufucuddlypoops" }))} />
-    </div>
+    </nav>
   );
 };
