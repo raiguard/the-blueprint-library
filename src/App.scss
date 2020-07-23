@@ -16,17 +16,21 @@
   font-weight: 500;
 }
 
-:root {
-  --main-background-color: #313031;
-  --main-font-color: #ffffff;
-  --bold-font-color: #ffe6c0;
+$main-background-color: #313031;
+$main-font-color: #ffffff;
+$main-font-family: TitilliumWeb;
+
+$toolbar-background-color: #242324;
+
+%bold-font {
+  color: #ffe6c0;
+  font-weight: 500;
 }
 
 .app {
-  background-color: #313031;
-  color: var(--bold-font-color);
-  font-family: TitilliumWeb;
-  font-weight: 500;
+  @extend %bold-font;
+  background-color: $main-background-color;
+  font-family: $main-font-family;
   font-size: 1.25rem;
   display: flex;
   justify-content: center;
