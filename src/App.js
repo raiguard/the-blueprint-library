@@ -29,7 +29,7 @@ export default () => {
     <div className="app">
       {authenticated && (
         <>
-          <main>{routes}</main>
+          {routes}
           <Nav />
         </>
       )}

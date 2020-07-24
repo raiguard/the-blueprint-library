@@ -48,13 +48,54 @@ $nav-height: 2.25rem;
   text-decoration: underline;
 }
 
-div {
+* {
+  box-sizing: border-box;
+}
+
+div,
+section {
   display: flex;
 }
 
 main {
   @extend %limited-width-container;
-  margin: $nav-height auto;
+  margin: calc(#{$nav-height} + 1rem) auto;
+}
+
+input {
+  background-color: #8e8e8e;
+  padding: 0.35rem 0.4rem 0.3rem;
+  box-shadow: inset 0.1rem 0.1rem 0.05rem #000000a6, inset -0.05rem -0.05rem 0.05rem #000000a6;
+  border: none;
+  outline: none;
+  vertical-align: baseline;
+}
+
+input:focus {
+  outline: none;
+  background-color: #f0dab4;
+}
+
+button {
+  cursor: pointer;
+  background-color: #8e8e8e;
+  border: outset;
+  border-color: #8e8e8e;
+  border-width: 0.1rem;
+  padding: 0.25rem;
+  padding-bottom: 0.35rem;
+}
+
+button:hover,
+button:focus {
+  background-color: #e39827;
+  border-color: #e39827;
+  outline: none;
+}
+
+button:active {
+  background-color: #f1be64;
+  border-color: #f1be64;
 }
 
 .app {
