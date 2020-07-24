@@ -1,27 +1,32 @@
-nav {
+.nav {
   background-color: $toolbar-background-color;
   position: fixed;
   width: 100vw;
   height: $nav-height;
   display: flex;
+  justify-content: center;
+}
+
+.nav .container {
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 1rem 0.2rem;
+  padding: 0.25rem;
+  padding-bottom: 0.4rem;
   box-sizing: border-box;
+  max-width: 75rem;
+  width: 75rem;
 }
 
-nav h1 {
+.nav h1 {
   @extend %bold-font;
-  margin-right: 1rem;
 }
 
-nav label {
+.nav label {
   @extend %link-font;
-  margin: 0 0.5rem;
-}
-
-.nav-left-part {
-  display: flex;
+  margin-left: 1rem;
 }
 
 .auth {

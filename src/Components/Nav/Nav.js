@@ -25,36 +25,38 @@ export default () => {
   };
 
   return (
-    <nav>
-      <div className="nav-left-part">
-        <Link to="/">
-          <h1>The Blueprint Library</h1>
-        </Link>
-        {userData.username && (
-          <Link to="/create">
-            <label>Create</label>
+    <nav className="nav">
+      <div className="container">
+        <div>
+          <Link to="/">
+            <h1>The Blueprint Library</h1>
           </Link>
-        )}
-        <Link to="/about">
-          <label>About</label>
-        </Link>
-      </div>
-      <div>
-        {userData.username ? (
-          <>
-            <Link to={`/profile/${userData.id}`}>
-              <label>Profile</label>
+          {userData.username && (
+            <Link to="/create">
+              <label>Create</label>
             </Link>
-            <label onClick={signOut}>Sign out</label>
-          </>
-        ) : (
-          <>
-            <label onClick={() => toggleAuthType("Sign in")}>Sign in</label>
-            <label onClick={() => toggleAuthType("Register")}>Register</label>
-          </>
-        )}
+          )}
+          <Link to="/about">
+            <label>About</label>
+          </Link>
+        </div>
+        <div>
+          {userData.username ? (
+            <>
+              <Link to={`/profile/${userData.id}`}>
+                <label>Profile</label>
+              </Link>
+              <label onClick={signOut}>Sign out</label>
+            </>
+          ) : (
+            <>
+              <label onClick={() => toggleAuthType("Sign in")}>Sign in</label>
+              <label onClick={() => toggleAuthType("Register")}>Register</label>
+            </>
+          )}
+        </div>
+        {authType && <Auth close={() => setAuthType(null)} type={authType} />}
       </div>
-      {authType && <Auth close={() => setAuthType(null)} type={authType} />}
     </nav>
   );
 };

@@ -20,6 +20,8 @@ $main-background-color: #313031;
 $toolbar-background-color: #242324;
 $main-font-family: TitilliumWeb;
 
+$nav-height: 2.25rem;
+
 %main-font {
   color: #ffffff;
 }
@@ -34,16 +36,24 @@ $main-font-family: TitilliumWeb;
   color: #80cef0;
 }
 
+div {
+  display: flex;
+}
+
 .app {
   @extend %main-font;
   background-color: $main-background-color;
   font-family: $main-font-family;
   min-height: 100vh;
+  width: 100vw;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
 }
 
-$nav-height: 2.25rem;
+.app-limited-container {
+  width: 75rem;
+  max-width: 75rem;
+}
 
 @import "./Components/Home/Home";
 @import "./Components/Nav/Nav";
