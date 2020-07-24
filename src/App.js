@@ -29,7 +29,7 @@ export default () => {
       {authenticated && (
         <>
           <Nav />
-          {routes}
+          <main>{routes}</main>
         </>
       )}
     </div>

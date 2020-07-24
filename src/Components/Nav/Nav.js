@@ -25,8 +25,8 @@ export default () => {
   };
 
   return (
-    <nav className="nav">
-      <div className="container">
+    <div className="nav-background">
+      <nav>
         <div>
           <Link to="/">
             <h1>The Blueprint Library</h1>
@@ -56,8 +56,8 @@ export default () => {
           )}
         </div>
         {authType && <Auth close={() => setAuthType(null)} type={authType} />}
-      </div>
-    </nav>
+      </nav>
+    </div>
   );
 };
 

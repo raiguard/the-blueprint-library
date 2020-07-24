@@ -50,9 +50,17 @@ div {
   -webkit-font-smoothing: antialiased;
 }
 
-.app-limited-container {
-  width: 75rem;
+main,
+nav {
+  margin: 0 auto;
   max-width: 75rem;
+  position: relative;
+  width: 75rem;
+  margin-top: $nav-height;
+}
+
+nav {
+  margin-top: 0;
 }
 
 @import "./Components/Home/Home";
