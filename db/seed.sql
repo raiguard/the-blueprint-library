@@ -12,7 +12,8 @@ create table posts (
   title varchar(80),
   img text,
   description varchar(3000),
-  timestamp int
+  created_timestamp int,
+  edited_timestamp int
 );
 
 create table comments (
@@ -20,11 +21,13 @@ create table comments (
   post_id int references posts(id),
   author_id int references users(id),
   content varchar(500),
-  timestamp int
+  created_timestamp int,
+  edited_timestamp int
 );
 
 create table records (
   id serial primary key,
+  type text,
   name text,
   description text,
   post_id int references posts(id),
