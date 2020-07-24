@@ -5,7 +5,7 @@ import Axios from "axios";
 
 import { clearUser, setUser } from "../../redux/reducer";
 
-export default (props) => {
+export default () => {
   const [authType, setAuthType] = useState(null);
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.user);
@@ -55,7 +55,7 @@ export default (props) => {
       <div>
         {userData.username ? (
           <>
-            <Link to="/profile">
+            <Link to={`/profile/${userData.id}`}>
               <label>Profile</label>
             </Link>
             <label onClick={signOut}>Sign out</label>
@@ -99,22 +99,15 @@ const Auth = ({ close, type }) => {
 
   return (
     <section className="auth">
-      <AuthInput label="Username:" value={username} setValue={setUsername} />
-      <AuthInput label="Password:" value={password} setValue={setPassword} onConfirm={checkCredentials} />
+      <div className="auth-input">
+        <h2>Username:</h2>
+        <input onChange={(e) => setUsername(e.target.value)} value={username} />
+      </div>
+      <div className="auth-input">
+        <h2>Password:</h2>
+        <input onChange={(e) => setPassword(e.target.value)} value={password} />
+      </div>
       <button onClick={checkCredentials}>{type}</button>
     </section>
-  );
-};
-
-const AuthInput = ({ label, onConfirm, setValue, value }) => {
-  const checkForEnter = (e) => {
-    if (onConfirm && e.which === 13) onConfirm();
-  };
-
-  return (
-    <div className="auth-input">
-      <h2>{label}</h2>
-      <input onChange={(e) => setValue(e.target.value)} value={value} onKeyPress={checkForEnter} />
-    </div>
   );
 };
