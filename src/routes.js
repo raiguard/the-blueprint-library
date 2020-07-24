@@ -5,6 +5,6 @@ import Home from "./Components/Home/Home";
 export default (
   <Switch>
     <Route exact path="/" component={Home} />
-    <Route render={() => <div>404 not found</div>} />
+    <Route render={() => <main>404 not found</main>} />
   </Switch>
 );
