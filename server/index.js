@@ -33,6 +33,7 @@ massive({
 app.post("/auth/register", authCtrl.register);
 app.post("/auth/signin", authCtrl.signIn);
 app.post("/auth/signout", authCtrl.signOut);
+app.get("/auth/me", authCtrl.checkSession);
 
 // listen
 app.listen(SERVER_PORT, () => console.log(`Server started on port ${SERVER_PORT}`));

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Axios from "axios";
@@ -10,6 +10,18 @@ export default (props) => {
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.user);
   const history = useHistory();
+
+  // on mount
+  useEffect(() => {
+    // useEffect() does not support async callbacks, so we have to nest it inside
+    const checkSession = async () => {
+      const res = await Axios.get("/auth/me");
+      if (res.data) {
+        dispatch(setUser(res.data));
+      }
+    };
+    checkSession();
+  }, [dispatch]);
 
   const toggleAuthType = (type) => {
     if (authType !== type) {

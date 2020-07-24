@@ -1,13 +1,23 @@
 const bcrypt = require("bcryptjs");
 
 module.exports = {
-  getSession: async (req, res) => {},
+  checkSession: async (req, res) => {
+    const db = req.app.get("db");
+    const { userID } = req.session;
+
+    const existingUser = await db.user.get_one(userID);
+    if (existingUser[0]) {
+      return res.status(200).send(existingUser[0]);
+    } else {
+      return res.sendStatus(204);
+    }
+  },
   register: async (req, res) => {
     const db = req.app.get("db");
     const { username, password } = req.body;
 
     // check to see if the user already exists
-    const existingUser = await db.user.check_exists(username);
+    const existingUser = await db.user.get_one(username);
     if (existingUser[1]) {
       return res.status(409).send("Username already taken");
     }
