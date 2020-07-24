@@ -29,6 +29,11 @@ $main-font-family: TitilliumWeb;
   font-weight: 500;
 }
 
+%link-font {
+  cursor: pointer;
+  color: #80cef0;
+}
+
 .app {
   @extend %main-font;
   background-color: $main-background-color;
@@ -38,4 +43,7 @@ $main-font-family: TitilliumWeb;
   -webkit-font-smoothing: antialiased;
 }
 
+$nav-height: 2.25rem;
+
+@import "./Components/Home/Home";
 @import "./Components/Nav/Nav";

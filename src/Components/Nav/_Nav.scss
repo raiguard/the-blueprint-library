@@ -1,3 +1,48 @@
 nav {
   background-color: $toolbar-background-color;
+  position: fixed;
+  width: 100vw;
+  height: $nav-height;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem 0.2rem;
+  box-sizing: border-box;
+}
+
+nav h1 {
+  @extend %bold-font;
+  margin-right: 1rem;
+}
+
+nav label {
+  @extend %link-font;
+  margin: 0 0.5rem;
+}
+
+.nav-left-part {
+  display: flex;
+}
+
+.auth {
+  position: absolute;
+  right: 0;
+  top: $nav-height;
+  background-color: $toolbar-background-color;
+  box-sizing: border-box;
+}
+
+.auth-input {
+  box-sizing: border-box;
+  padding: 0.5rem;
+  width: 17.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.auth button {
+  box-sizing: border-box;
+  margin: 0.5rem;
+  width: 95%;
 }
