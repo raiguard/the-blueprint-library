@@ -24,12 +24,13 @@ export default () => {
   }, [dispatch]);
 
   // do not render until the session has been checked
+  // render the nav AFTER the main contents to guarantee that it's on top
   return (
     <div className="app">
       {authenticated && (
         <>
-          <Nav />
           <main>{routes}</main>
+          <Nav />
         </>
       )}
     </div>
