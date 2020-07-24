@@ -3,6 +3,10 @@ const bcrypt = require("bcryptjs");
 module.exports = {
   checkSession: async (req, res) => {
     const db = req.app.get("db");
+
+    // avoid crashes during development
+    if (!db) return res.sendStatus(204);
+
     const { userID } = req.session;
 
     const existingUser = await db.user.get_one(userID);
