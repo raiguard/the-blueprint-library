@@ -72,23 +72,23 @@
 
 ### records
 
-| column name       | datatype   | constraints |
-| ----------------- | ---------- | ----------- |
-| id                | serial     | primary key |
-| type              | varchar(5) |             |
-| name              | text       |             |
-| description       | text       |             |
-| icon_1            | text       |             |
-| icon_2            | text       |             |
-| icon_3            | text       |             |
-| icon_4            | text       |             |
-| grid_snap_x       | smallint   |             |
-| grid_snap_y       | smallint   |             |
-| absolute_snapping | boolean    |             |
-| active_index      | smallint   |             |
-| post_id           | int        |             |
-| book_id           | int        |             |
-| string            | text       |             |
+| column name       | datatype     | constraints            |
+| ----------------- | ------------ | ---------------------- |
+| id                | serial       | primary key            |
+| type              | varchar(5)   |                        |
+| name              | varchar(200) |                        |
+| description       | varchar(500) |                        |
+| icon_1            | varchar(100) |                        |
+| icon_2            | varchar(100) |                        |
+| icon_3            | varchar(100) |                        |
+| icon_4            | varchar(100) |                        |
+| grid_snap_x       | smallint     |                        |
+| grid_snap_y       | smallint     |                        |
+| absolute_snapping | boolean      |                        |
+| active_index      | smallint     |                        |
+| post_id           | int          | references posts(id)   |
+| book_id           | int          | references records(id) |
+| string            | text         |                        |
 
 ## Endpoints
 
@@ -202,3 +202,25 @@ GET "/api/record/:recordid"
 - SASS everywhere: 20 / 10 (max 30 for additional techs)
 - Hosted: 10
 - Picture-perfect presentation: 10
+
+## Wireframes
+
+### Home / Search
+
+![](./wireframes/home-search.png)
+
+### Post
+
+![](./wireframes/post.png)
+
+### Profile
+
+![](./wireframes/profile.png)
+
+### Create post
+
+![](./wireframes/create-post.png)
+
+### Edit post
+
+![](./wireframes/edit-post.png)
