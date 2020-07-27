@@ -72,16 +72,16 @@ const Auth = ({ close, type }) => {
         const res = await Axios.post("/auth/register", { username, password });
         dispatch(setUser(res.data));
         close();
-      } catch {
-        alert("Username already taken");
+      } catch (err) {
+        alert(err.response.request.response);
       }
     } else {
       try {
         const res = await Axios.post("/auth/signin", { username, password });
         dispatch(setUser(res.data));
         close();
-      } catch {
-        alert("Username or password is incorrect");
+      } catch (err) {
+        alert(err.response.request.response);
       }
     }
   };
@@ -90,11 +90,11 @@ const Auth = ({ close, type }) => {
     <section className="auth">
       <div className="auth-input">
         <h2>Username:</h2>
-        <input onChange={(e) => setUsername(e.target.value)} value={username} />
+        <input name="username" onChange={(e) => setUsername(e.target.value)} value={username} />
       </div>
       <div className="auth-input">
         <h2>Password:</h2>
-        <input onChange={(e) => setPassword(e.target.value)} value={password} />
+        <input name="password" type="password" onChange={(e) => setPassword(e.target.value)} value={password} />
       </div>
       <button onClick={checkCredentials}>{type}</button>
     </section>
