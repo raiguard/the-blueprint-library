@@ -26,3 +26,7 @@ yarn-error.log*
 # vscode
 .vscode
 *.code-workspace
+
+# other
+sample-blueprint.json
+sample-blueprint-book.json

@@ -1,10 +1,35 @@
+.home {
+  flex-direction: column;
+  align-items: center;
+}
+
 .home .search {
   justify-content: center;
   align-items: center;
   padding: 0 1rem 1rem;
+  width: 100%;
 }
 
 .home .search input {
   padding: 0.5rem;
   width: 60%;
+}
+
+.home .grid-view {
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 60%;
+}
+
+.post-card {
+  flex-direction: column;
+  background-color: #403f40;
+  padding: 0.75rem;
+  box-shadow: 0.15rem 0.15rem 0.1rem 0.1rem #0000002d;
+  width: 47%;
+  margin: 0.5rem;
+}
+
+.post-card h1 {
+  @extend %bold-font;
 }
