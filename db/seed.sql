@@ -9,9 +9,9 @@ create table users (
 create table posts (
   id serial primary key,
   author_id int references users(id),
-  title varchar(80),
+  title varchar(200),
   img text,
-  description varchar(3000),
+  description varchar(1000),
   created_timestamp int,
   edited_timestamp int
 );
@@ -27,9 +27,17 @@ create table comments (
 
 create table records (
   id serial primary key,
-  type text,
-  name text,
-  description text,
+  type varchar(5),
+  name varchar(200),
+  description varchar(500),
+  icon_1 varchar(100),
+  icon_2 varchar(100),
+  icon_3 varchar(100),
+  icon_4 varchar(100),
+  grid_snap_x smallint,
+  grid_snap_y smallint,
+  absolute_snapping boolean,
+  active_index smallint,
   post_id int references posts(id),
   book_id int references records(id),
   string text
