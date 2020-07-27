@@ -76,6 +76,10 @@ input:focus {
   background-color: #f0dab4;
 }
 
+input::placeholder {
+  color: #00000081;
+}
+
 button {
   cursor: pointer;
   background-color: #8e8e8e;
