@@ -31,7 +31,7 @@ module.exports = {
 
     // check to see if the user already exists
     const existingUser = await db.user.check_username(username);
-    if (existingUser[1]) {
+    if (existingUser[0]) {
       return res.status(409).send("Username already taken");
     }
 

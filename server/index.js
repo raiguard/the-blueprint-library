@@ -1,8 +1,11 @@
+const record = require("./controllers/record");
+
 require("dotenv").config();
 const express = require("express"),
   session = require("express-session"),
   massive = require("massive"),
   authCtrl = require("./controllers/auth"),
+  recordCtrl = require("./controllers/record"),
   { CONNECTION_STRING, SERVER_PORT, SESSION_SECRET } = process.env,
   app = express();
 
@@ -34,6 +37,8 @@ app.post("/auth/register", authCtrl.register);
 app.post("/auth/signin", authCtrl.signIn);
 app.post("/auth/signout", authCtrl.signOut);
 app.get("/auth/me", authCtrl.checkSession);
+
+app.post("/test/string", recordCtrl.test);
 
 // listen
 app.listen(SERVER_PORT, () => console.log(`Server started on port ${SERVER_PORT}`));
