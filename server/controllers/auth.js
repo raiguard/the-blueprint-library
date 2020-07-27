@@ -18,10 +18,19 @@ module.exports = {
   },
   register: async (req, res) => {
     const db = req.app.get("db");
-    const { username, password } = req.body;
+    let { username, password } = req.body;
+
+    username = username.trim();
+
+    // check username and password length
+    if (username.length === 0 || username.length > 30) {
+      return res.status(400).send("Username must be between 1 and 30 characters");
+    } else if (password.length === 0) {
+      return res.status(400).send("Password must be at least 1 character");
+    }
 
     // check to see if the user already exists
-    const existingUser = await db.user.get_one(username);
+    const existingUser = await db.user.check_username(username);
     if (existingUser[1]) {
       return res.status(409).send("Username already taken");
     }
@@ -36,7 +45,9 @@ module.exports = {
   },
   signIn: async (req, res) => {
     const db = req.app.get("db");
-    const { username, password } = req.body;
+    let { username, password } = req.body;
+
+    username = username.trim();
 
     // be certain the user actually exists
     const userArr = await db.user.get_complete(username);
