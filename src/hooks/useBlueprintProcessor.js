@@ -35,6 +35,11 @@ const readNext = (raw) => {
   if (key === "blueprint" || key === "blueprint_book") {
     const rawObj = raw[key];
 
+    const item = rawObj.item;
+    if (!(item === "blueprint" || item === "blueprint-book")) {
+      return "Only vanilla blueprints and blueprint books are supported.";
+    }
+
     // common
     let record = {
       name: rawObj.label || null,
