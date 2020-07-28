@@ -78,14 +78,16 @@
 | type              | varchar(5)   |                        |
 | name              | varchar(200) |                        |
 | description       | varchar(500) |                        |
-| icon_1            | varchar(100) |                        |
-| icon_2            | varchar(100) |                        |
-| icon_3            | varchar(100) |                        |
-| icon_4            | varchar(100) |                        |
+| icon_1            | varchar(250) |                        |
+| icon_2            | varchar(250) |                        |
+| icon_3            | varchar(250) |                        |
+| icon_4            | varchar(250) |                        |
 | grid_snap_x       | smallint     |                        |
 | grid_snap_y       | smallint     |                        |
 | absolute_snapping | boolean      |                        |
 | active_index      | smallint     |                        |
+| index             | smallint     |                        |
+| item              | varchar(200) |                        |
 | post_id           | int          | references posts(id)   |
 | book_id           | int          | references records(id) |
 | string            | text         |                        |

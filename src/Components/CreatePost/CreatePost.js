@@ -20,6 +20,7 @@ export default () => {
 
   const testStringProcessor = async () => {
     const status = await addRecord(string);
+    console.log(records);
     if (status.alert) {
       alert(status.alert);
     }
