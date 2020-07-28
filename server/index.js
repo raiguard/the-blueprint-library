@@ -5,7 +5,7 @@ const express = require("express"),
   session = require("express-session"),
   massive = require("massive"),
   authCtrl = require("./controllers/auth"),
-  recordCtrl = require("./controllers/record"),
+  postCtrl = require("./controllers/post")
   { CONNECTION_STRING, SERVER_PORT, SESSION_SECRET } = process.env,
   app = express();
 
@@ -38,7 +38,7 @@ app.post("/auth/signin", authCtrl.signIn);
 app.post("/auth/signout", authCtrl.signOut);
 app.get("/auth/me", authCtrl.checkSession);
 
-app.post("/test/string", recordCtrl.test);
+app.post("/auth/post", postCtrl.create)
 
 // listen
 app.listen(SERVER_PORT, () => console.log(`Server started on port ${SERVER_PORT}`));
