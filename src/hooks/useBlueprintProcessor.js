@@ -1,6 +1,7 @@
 import Pako from "pako";
 import { useState } from "react";
 
+// decode and encode
 const decodeString = (string) => {
   return JSON.parse(Pako.inflate(atob(string.substr(1)), { to: "string" }));
 };
@@ -52,18 +53,25 @@ const readNext = (raw) => {
 
     // per-type
     record = processors[key](rawObj, record);
+    let error = null;
     if (key === "blueprint_book") {
       record.children = [];
       rawObj.blueprints.forEach((child) => {
-        const childRecord = readNext(child);
-        if (childRecord) {
-          childRecord.index = record.children.length + 1;
-          record.children.push(childRecord);
+        if (!error) {
+          const childRecord = readNext(child);
+          if (typeof childRecord === "object") {
+            childRecord.index = record.children.length + 1;
+            record.children.push(childRecord);
+          } else {
+            error = childRecord;
+          }
         }
       });
     }
 
-    return record;
+    return error || record;
+  } else {
+    return "Upgrade and deconstruction planners are not supported.";
   }
 };
 
@@ -78,20 +86,26 @@ const useBlueprintProcessor = () => {
       raw = decodeString(string);
     } catch {
       return {
-        alert: "Invalid blueprint string"
+        error: "Could not decode string"
       };
     }
 
     const record = readNext(raw);
-    record.index = records.length;
+    if (typeof record === "object") {
+      record.index = records.length;
 
-    setRecords(records.push(record));
+      setRecords([...records, record]);
 
-    return {};
+      return {};
+    } else {
+      return {
+        error: record
+      };
+    }
   };
 
   const removeRecord = (index) => {
-    setRecords(records.splice(index));
+    setRecords([...records].splice(index));
     return {};
   };
 

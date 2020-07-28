@@ -9,20 +9,10 @@ export default () => {
   const [string, setString] = useState(sampleStrings.book);
   const [records, addRecord, removeRecord] = useBlueprintProcessor();
 
-  // const testStringUpload = async () => {
-  //   try {
-  //     const res = await Axios.post("/test/string", { string });
-  //     console.log(res.data);
-  //   } catch (err) {
-  //     alert(err.response.request.response);
-  //   }
-  // };
-
-  const testStringProcessor = async () => {
-    const status = await addRecord(string);
-    console.log(records);
-    if (status.alert) {
-      alert(status.alert);
+  const testStringProcessor = () => {
+    const status = addRecord(string);
+    if (status.error) {
+      alert(status.error);
     }
   };
 
@@ -32,7 +22,11 @@ export default () => {
         <input placeholder="Input string..." value={string} onChange={(e) => setString(e.target.value)} />
         <button onClick={testStringProcessor}>Add</button>
       </section>
-      <section className="listing"></section>
+      <section className="listing">
+        {records.map((record, i) => (
+          <Record key={i} data={record} />
+        ))}
+      </section>
     </main>
   );
 };

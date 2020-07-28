@@ -8,7 +8,11 @@
   width: 100%;
 }
 
-.create-post input {
+.create-post .textfield input {
   padding: 0.5rem;
   width: 60%;
+}
+
+.create-post .listing {
+  flex-direction: column;
 }

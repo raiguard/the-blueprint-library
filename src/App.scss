@@ -57,6 +57,7 @@ main,
 section {
   display: flex;
   flex-direction: row;
+  max-width: 100%;
 }
 
 main {
@@ -93,8 +94,7 @@ button {
   padding-bottom: 0.35rem;
 }
 
-button:hover,
-button:focus {
+button:hover {
   background-color: #e39827;
   border-color: #e39827;
   outline: none;
@@ -103,6 +103,10 @@ button:focus {
 button:active {
   background-color: #f1be64;
   border-color: #f1be64;
+}
+
+button:focus {
+  outline: 0;
 }
 
 .app {
@@ -118,3 +122,4 @@ button:active {
 @import "./Components//CreatePost/CreatePost";
 @import "./Components/Home/Home";
 @import "./Components/Nav/Nav";
+@import "./Components/Record/Record";
