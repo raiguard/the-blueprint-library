@@ -1,13 +1,31 @@
 insert into records (
+  type,
   name,
   description,
+  icon_1,
+  icon_2,
+  icon_3,
+  icon_4,
+  grid_snap_x,
+  grid_snap_y,
+  absolute_snapping,
+  active_index,
   post_id,
   book_id,
   string
 ) values (
+  ${type},
   ${name},
   ${description},
-  ${postID},
-  ${bookID},
+  ${icon_1},
+  ${icon_2},
+  ${icon_3},
+  ${icon_4},
+  ${grid_snap_x},
+  ${grid_snap_y},
+  ${absolute_snapping},
+  ${active_index},
+  ${post_id},
+  ${book_id},
   ${string}
 );
