@@ -56,6 +56,7 @@
 | title             | varchar(80)   |                      |
 | img               | text          |                      |
 | description       | varchar(3000) |                      |
+| likes             | int           |                      |
 | created_timestamp | int           |                      |
 | edited_timestamp  | int           |                      |
 

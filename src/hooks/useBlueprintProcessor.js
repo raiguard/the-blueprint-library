@@ -29,55 +29,57 @@ const processors = {
 };
 
 // iteration
-const readNext = (raw) => {
+const readRecord = (raw) => {
   const key = Object.keys(raw)[0];
   // only process blueprints and blueprint books
-  if (key === "blueprint" || key === "blueprint_book") {
-    const rawObj = raw[key];
-
-    const item = rawObj.item;
-    if (!(item === "blueprint" || item === "blueprint-book")) {
-      return "Only vanilla blueprints and blueprint books are supported.";
-    }
-
-    // common
-    let record = {
-      name: rawObj.label || null,
-      description: rawObj.description || null,
-      item: rawObj.item
-    };
-
-    if (rawObj.icons) {
-      rawObj.icons.forEach((iconDef) => {
-        record[`icon_${iconDef.index}`] = `${iconDef.signal.type}/${iconDef.signal.name}`;
-      });
-    }
-
-    delete raw.index;
-    record.string = encodeString(raw);
-
-    // per-type
-    record = processors[key](rawObj, record);
-    let error = null;
-    if (key === "blueprint_book") {
-      record.children = [];
-      rawObj.blueprints.forEach((child) => {
-        if (!error) {
-          const childRecord = readNext(child);
-          if (typeof childRecord === "object") {
-            childRecord.index = record.children.length + 1;
-            record.children.push(childRecord);
-          } else {
-            error = childRecord;
-          }
-        }
-      });
-    }
-
-    return error || record;
-  } else {
+  if (!(key === "blueprint" || key === "blueprint_book")) {
     return "Upgrade and deconstruction planners are not supported.";
   }
+
+  const rawObj = raw[key];
+
+  const item = rawObj.item;
+  if (!(item === "blueprint" || item === "blueprint-book")) {
+    return "Only vanilla blueprints and blueprint books are supported.";
+  }
+
+  // common
+  let record = {
+    name: rawObj.label || null,
+    description: rawObj.description || null,
+    item: rawObj.item
+  };
+
+  if (rawObj.icons) {
+    rawObj.icons.forEach((iconDef) => {
+      record[`icon_${iconDef.index}`] = `${iconDef.signal.type}/${iconDef.signal.name}`;
+    });
+  }
+
+  delete raw.index;
+  record.string = encodeString(raw);
+
+  // per-type
+  record = processors[key](rawObj, record);
+
+  // iterate over blueprint book children
+  let error = null;
+  if (key === "blueprint_book") {
+    record.children = [];
+    const children = rawObj.blueprints;
+    for (let i = 0; i < children.length; i++) {
+      const childRecord = readRecord(children[i]);
+      if (typeof childRecord === "object") {
+        childRecord.index = record.children.length + 1;
+        record.children.push(childRecord);
+      } else {
+        error = childRecord;
+        break;
+      }
+    }
+  }
+
+  return error || record;
 };
 
 // hook
@@ -95,7 +97,7 @@ const useBlueprintProcessor = () => {
       };
     }
 
-    const record = readNext(raw);
+    const record = readRecord(raw);
     if (typeof record === "object") {
       record.index = records.length;
 
@@ -110,7 +112,9 @@ const useBlueprintProcessor = () => {
   };
 
   const removeRecord = (index) => {
-    setRecords([...records].splice(index));
+    let tempRecords = [...records];
+    tempRecords.splice(index, 1);
+    setRecords(tempRecords);
     return {};
   };
 
