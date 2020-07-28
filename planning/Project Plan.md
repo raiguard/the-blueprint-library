@@ -116,7 +116,12 @@ POST "/api/post"
     author_id: 1,
     title: "My Space Science setup",
     img: "https://s3.aws/theimage",
-    description: "This is my awesome space science setup."
+    description: "This is my awesome space science setup.",
+    records: [
+      {
+        (blueprint record contents, very complicated)
+      }
+    ]
   }
   Send: status
 
