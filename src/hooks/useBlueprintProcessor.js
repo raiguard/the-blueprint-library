@@ -9,57 +9,61 @@ const encodeString = (obj) => {
 };
 
 // processors
-const processBook = (raw) => {
-  let book = processCommon(raw);
-  book.active_index = raw.active_index;
-  book.children = [];
-  return book;
-};
-const processCommon = (raw) => {
-  let obj = {
-    name: raw.label || null,
-    description: raw.description || null,
-    item: raw.item
-  };
-
-  if (raw.icons) {
-    raw.icons.forEach((iconDef) => {
-      obj[`icon_${iconDef.index}`] = `${iconDef.signal.type}/${iconDef.signal.name}`;
-    });
+const processors = {
+  blueprint: (raw, print) => {
+    print.type = "print";
+    if (raw.snap_to_grid) {
+      print.grid_snap_x = raw.snap_to_grid.x;
+      print.grid_snap_y = raw.snap_to_grid.y;
+    }
+    print.absolute_snapping = raw.absolute_snapping || null;
+    return print;
+  },
+  blueprint_book: (raw, book) => {
+    book.type = "book";
+    book.active_index = raw.active_index;
+    book.children = [];
+    return book;
   }
-
-  return obj;
-};
-const processPrint = (raw) => {
-  let print = processCommon(raw);
-  if (raw.snap_to_grid) {
-    print.grid_snap_x = raw.snap_to_grid.x;
-    print.grid_snap_y = raw.snap_to_grid.y;
-  }
-  print.absolute_snapping = raw.absolute_snapping || null;
-  return print;
 };
 
 // iteration
-const readNext = (raw, index) => {
+const readNext = (raw) => {
+  const key = Object.keys(raw)[0];
   // only process blueprints and blueprint books
-  if (raw.blueprint_book) {
-    const rawObj = raw.blueprint_book;
-    let book = processBook(rawObj);
-    book.type = "book";
-    book.index = raw.index || index;
+  if (key === "blueprint" || key === "blueprint_book") {
+    const rawObj = raw[key];
+
+    // common
+    let record = {
+      name: rawObj.label || null,
+      description: rawObj.description || null,
+      item: rawObj.item
+    };
+
+    if (rawObj.icons) {
+      rawObj.icons.forEach((iconDef) => {
+        record[`icon_${iconDef.index}`] = `${iconDef.signal.type}/${iconDef.signal.name}`;
+      });
+    }
+
     delete raw.index;
-    book.string = encodeString(raw);
-    rawObj.blueprints.forEach((child) => book.children.push(readNext(child)));
-    return book;
-  } else if (raw.blueprint) {
-    const rawObj = raw.blueprint;
-    let print = processPrint(rawObj);
-    print.type = "print";
-    print.index = raw.index || index;
-    delete raw.index;
-    print.string = encodeString(raw);
-    return print;
+    record.string = encodeString(raw);
+
+    // per-type
+    record = processors[key](rawObj, record);
+    if (key === "blueprint_book") {
+      record.children = [];
+      rawObj.blueprints.forEach((child) => {
+        const childRecord = readNext(child);
+        if (childRecord) {
+          childRecord.index = record.children.length + 1;
+          record.children.push(childRecord);
+        }
+      });
+    }
+
+    return record;
   }
 };
 
@@ -78,7 +82,8 @@ const useBlueprintProcessor = () => {
       };
     }
 
-    const record = readNext(raw, records.length);
+    const record = readNext(raw);
+    record.index = records.length;
 
     setRecords(records.push(record));
 
