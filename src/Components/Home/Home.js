@@ -22,7 +22,7 @@ export default () => {
       </section>
       <section className="grid-view">
         {posts.map((post, i) => (
-          <Link key={i} className="post-card" to={`/posts/${post.id}`}>
+          <Link key={i} className="post-card" to={`/post/${post.id}`}>
             <h1>{post.title}</h1>
             <p>{post.description}</p>
           </Link>
