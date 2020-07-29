@@ -13,6 +13,7 @@ const fields = [
   "book_id"
 ];
 
+// recursively adds all records in the records table to the database
 const addRecords = async (db, records, postID, bookID) => {
   // records must be added from the top down, so book IDs can be gotten
   records.forEach(async (record) => {
@@ -33,12 +34,9 @@ const addRecords = async (db, records, postID, bookID) => {
     const dbRes = await db.record.add(record);
 
     // add all children
-    if (children) addRecords(db, children, postID, dbRes[0].id);
+    if (children) await addRecords(db, children, postID, dbRes[0].id);
   });
 };
-
-// brute-force delete records and recreate them when editing a post
-const deleteRecords = async (postID) => {};
 
 module.exports = {
   create: async (req, res) => {
@@ -58,8 +56,19 @@ module.exports = {
     await addRecords(db, records, postID);
     res.sendStatus(200);
   },
-  edit: (req, res) => {},
-  delete: (req, res) => {},
+  edit: (req, res) => {
+    // TODO delete old records
+  },
+  delete: (req, res) => {
+    // todo delete post records
+  },
   getOne: (req, res) => {},
-  getAll: (req, res) => {}
+  getAll: async (req, res) => {
+    const db = req.app.get("db");
+    const { query } = req.query;
+
+    const dbRes = await db.post.get_all(query);
+
+    res.status(200).send(dbRes);
+  }
 };

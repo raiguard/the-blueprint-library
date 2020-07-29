@@ -37,6 +37,7 @@ app.post("/auth/signout", authCtrl.signOut);
 app.get("/auth/me", authCtrl.checkSession);
 
 app.post("/api/post", postCtrl.create);
+app.get("/api/posts", postCtrl.getAll);
 
 // listen
 app.listen(SERVER_PORT, () => console.log(`Server started on port ${SERVER_PORT}`));
