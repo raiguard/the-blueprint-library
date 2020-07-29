@@ -9,8 +9,12 @@ export default () => {
 
   useEffect(() => {
     const fetchPost = async () => {
-      const res = await Axios.get(`/api/post/${postID}`);
-      setPostData(res.data);
+      try {
+        const res = await Axios.get(`/api/post/${postID}`);
+        setPostData(res.data);
+      } catch (err) {
+        alert(err.response.request.response);
+      }
     };
     // reset post data in case user is switching from one post to another
     setPostData(null);

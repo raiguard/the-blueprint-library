@@ -7,7 +7,7 @@ import { setUser } from "./redux/reducer";
 import routes from "./routes";
 
 export default () => {
-  const [authenticated, setAuthenticated] = useState(false);
+  const [sessionChecked, setSessionChecked] = useState(false);
   const dispatch = useDispatch();
 
   // check session for logged in user
@@ -18,7 +18,7 @@ export default () => {
       if (res.data) {
         dispatch(setUser(res.data));
       }
-      setAuthenticated(true);
+      setSessionChecked(true);
     };
     checkSession();
   }, [dispatch]);
@@ -27,7 +27,7 @@ export default () => {
   // render the nav AFTER the main contents to guarantee that it's on top
   return (
     <div className="app">
-      {authenticated && (
+      {sessionChecked && (
         <>
           {routes}
           <Nav />

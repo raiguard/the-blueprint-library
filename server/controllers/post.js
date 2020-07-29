@@ -54,7 +54,7 @@ module.exports = {
     });
     const postID = dbRes[0].id;
     await addRecords(db, records, postID);
-    res.sendStatus(200);
+    res.status(200).send({ postID });
   },
   edit: async (req, res) => {
     // TODO delete old records
@@ -67,10 +67,14 @@ module.exports = {
     const db = req.app.get("db");
     const { postID } = req.params;
 
-    const dbRes = await db.post.get_one(+postID);
+    try {
+      const dbRes = await db.post.get_one(+postID);
 
-    if (dbRes[0]) res.status(200).send(dbRes[0]);
-    else res.status(400).send("Post does not exist");
+      if (dbRes[0]) res.status(200).send(dbRes[0]);
+      else res.status(400).send("Post does not exist");
+    } catch {
+      res.status(400).send("Post does not exist");
+    }
   },
   getAll: async (req, res) => {
     const db = req.app.get("db");
