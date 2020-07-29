@@ -12,9 +12,10 @@ export default () => {
   const [records, addRecord, removeRecord] = useBlueprintProcessor();
   const history = useHistory();
 
-  const testStringProcessor = () => {
+  const addRecordToPost = () => {
     const status = addRecord(string);
     if (status.error) {
+      // TODO inline warnings, not alerts
       alert(status.error);
     }
   };
@@ -30,7 +31,7 @@ export default () => {
         <input placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} />
         <input placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)} />
         <input placeholder="Input string..." value={string} onChange={(e) => setString(e.target.value)} />
-        <button onClick={testStringProcessor}>Add</button>
+        <button onClick={addRecordToPost}>Add</button>
       </section>
       <section className="listing">
         {records.map((record, i) => (

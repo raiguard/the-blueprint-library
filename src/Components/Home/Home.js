@@ -3,7 +3,7 @@ import Axios from "axios";
 import { Link } from "react-router-dom";
 
 export default () => {
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState(null);
   const [query, setQuery] = useState("");
 
   useEffect(() => {
@@ -21,12 +21,16 @@ export default () => {
         <input placeholder="Search..." value={query} onChange={(e) => setQuery(e.target.value)} />
       </section>
       <section className="grid-view">
-        {posts.map((post, i) => (
-          <Link key={i} className="post-card" to={`/post/${post.id}`}>
-            <h1>{post.title}</h1>
-            <p>{post.description}</p>
-          </Link>
-        ))}
+        {posts ? (
+          posts.map((post, i) => (
+            <Link key={i} className="post-card" to={`/post/${post.id}`}>
+              <h1>{post.title}</h1>
+              <p>{post.description}</p>
+            </Link>
+          ))
+        ) : (
+          <label>Loading posts...</label>
+        )}
       </section>
     </main>
   );
