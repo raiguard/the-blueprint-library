@@ -53,23 +53,23 @@
 | ----------------- | ------------- | -------------------- |
 | id                | serial        | primary key          |
 | author_id         | int           | references users(id) |
-| title             | varchar(80)   |                      |
+| title             | varchar(200)  |                      |
 | img               | text          |                      |
-| description       | varchar(3000) |                      |
+| description       | varchar(1000) |                      |
 | likes             | int           |                      |
 | created_timestamp | int           |                      |
 | edited_timestamp  | int           |                      |
 
 ### comments
 
-| column name       | datatype      | constraints          |
-| ----------------- | ------------- | -------------------- |
-| id                | serial        | primary key          |
-| post_id           | int           | references posts(id) |
-| author_id         | int           | references users(id) |
-| content           | varchar(1000) |                      |
-| created_timestamp | int           |                      |
-| edited_timestamp  | int           |                      |
+| column name       | datatype     | constraints          |
+| ----------------- | ------------ | -------------------- |
+| id                | serial       | primary key          |
+| post_id           | int          | references posts(id) |
+| author_id         | int          | references users(id) |
+| content           | varchar(500) |                      |
+| created_timestamp | int          |                      |
+| edited_timestamp  | int          |                      |
 
 ### records
 
