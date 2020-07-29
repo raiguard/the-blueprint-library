@@ -13,11 +13,11 @@ const encodeString = (obj) => {
 const processors = {
   blueprint: (raw, print) => {
     print.type = "print";
-    if (raw.snap_to_grid) {
-      print.grid_snap_x = raw.snap_to_grid.x;
-      print.grid_snap_y = raw.snap_to_grid.y;
+    if (raw["snap-to-grid"]) {
+      print.grid_snap_x = raw["snap-to-grid"].x;
+      print.grid_snap_y = raw["snap-to-grid"].y;
     }
-    print.absolute_snapping = raw.absolute_snapping || null;
+    print.absolute_snapping = raw["absolute-snapping"] || null;
     return print;
   },
   blueprint_book: (raw, book) => {
