@@ -54,6 +54,11 @@ $nav-height: 2.25rem;
   box-sizing: border-box;
 }
 
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
 div,
 main,
 section {
