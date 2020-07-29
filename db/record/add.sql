@@ -10,6 +10,8 @@ insert into records (
   grid_snap_y,
   absolute_snapping,
   active_index,
+  index,
+  item,
   post_id,
   book_id,
   string
@@ -25,7 +27,10 @@ insert into records (
   ${grid_snap_y},
   ${absolute_snapping},
   ${active_index},
+  ${index},
+  ${item},
   ${post_id},
   ${book_id},
   ${string}
-);
+)
+returning id;
