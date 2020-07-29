@@ -26,7 +26,7 @@ const addRecords = async (db, records, postID, bookID) => {
 
     // set any missing optional fields to NULL
     fields.forEach((fieldName) => {
-      record[fieldName] = record[fieldName] || null;
+      if (record[fieldName] === undefined) record[fieldName] = null;
     });
 
     // add to database
