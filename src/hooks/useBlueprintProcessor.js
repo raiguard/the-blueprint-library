@@ -1,13 +1,5 @@
-import Pako from "pako";
 import { useState } from "react";
-
-// decode and encode
-const decodeString = (string) => {
-  return JSON.parse(Pako.inflate(atob(string.substr(1)), { to: "string" }));
-};
-const encodeString = (obj) => {
-  return "0" + btoa(Pako.deflate(JSON.stringify(obj), { to: "string" }));
-};
+import { decodeString, encodeString } from "../lib/stringEncoder";
 
 // processors
 const processors = {

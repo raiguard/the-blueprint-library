@@ -1,6 +1,7 @@
 import Axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { decodeString } from "../../lib/stringEncoder";
 import RecordsList from "../RecordsList/RecordsList";
 
 export default () => {
@@ -12,7 +13,10 @@ export default () => {
     const fetchPost = async () => {
       try {
         const res = await Axios.get(`/api/post/${postID}`);
-        setPostData(res.data);
+        // decompress records table
+        let postData = res.data;
+        postData.records = decodeString(postData.records);
+        setPostData(postData);
       } catch (err) {
         alert(err.response.request.response);
       }

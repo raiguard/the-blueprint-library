@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import useBlueprintProcessor from "../../hooks/useBlueprintProcessor";
 import sampleStrings from "../../sampleStrings";
 import Record from "../Record/Record";
@@ -6,6 +6,10 @@ import Record from "../Record/Record";
 export default ({ editable, defaultRecords, setRecords }) => {
   const [string, setString] = useState(sampleStrings.book);
   const [records, addRecord, removeRecord] = useBlueprintProcessor(defaultRecords || []);
+
+  useEffect(() => {
+    setRecords && setRecords(records);
+  }, [records, setRecords]);
 
   const addRecordToList = async () => {
     const status = await addRecord(string);
@@ -20,7 +24,7 @@ export default ({ editable, defaultRecords, setRecords }) => {
   return (
     <section className="listing">
       {records.map((record, i) => (
-        <Record key={i} data={record} index={i} remove={removeRecord} />
+        <Record key={i} data={record} index={i} remove={editable ? removeRecord : null} />
       ))}
       {editable && (
         <>

@@ -1,6 +1,7 @@
 import Axios from "axios";
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+import { encodeString } from "../../lib/stringEncoder";
 import RecordsList from "../RecordsList/RecordsList";
 
 export default () => {
@@ -10,7 +11,9 @@ export default () => {
   const history = useHistory();
 
   const uploadPost = async () => {
-    const res = await Axios.post("/api/post", { title, description, records });
+    // compress records before sending them
+    const compressed = encodeString(records);
+    const res = await Axios.post("/api/post", { title, description, records: compressed });
     history.push(`/post/${res.data.postID}`);
   };
 

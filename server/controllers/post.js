@@ -1,3 +1,5 @@
+const stringEncoder = require("../lib/stringEncoder");
+
 // only the fields that may or may not exist
 const fields = [
   "name",
@@ -68,7 +70,7 @@ module.exports = {
       timestamp
     });
     const postID = dbRes[0].id;
-    await addRecords(db, records, postID);
+    await addRecords(db, stringEncoder.decode(records), postID);
     res.status(200).send({ postID });
   },
   edit: async (req, res) => {
@@ -90,7 +92,7 @@ module.exports = {
       }
 
       // get records
-      postData.records = await getRecords(db, +postID, null);
+      postData.records = stringEncoder.encode(await getRecords(db, +postID, null));
 
       res.status(200).send(postData);
     } catch {

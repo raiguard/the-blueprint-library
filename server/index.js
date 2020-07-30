@@ -7,7 +7,7 @@ const express = require("express"),
   { CONNECTION_STRING, SERVER_PORT, SESSION_SECRET } = process.env,
   app = express();
 
-app.use(express.json());
+app.use(express.json({ limit: "50mb" }));
 
 // session
 app.use(
