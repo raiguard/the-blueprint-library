@@ -26,6 +26,8 @@ export default () => {
             <Link key={i} className="post-card" to={`/post/${post.id}`}>
               <h1>{post.title}</h1>
               <p>{post.description}</p>
+              <p>Likes: {post.likes}</p>
+              <p>By {post.author_username}</p>
             </Link>
           ))
         ) : (
