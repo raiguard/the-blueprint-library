@@ -1,26 +1,40 @@
 import Axios from "axios";
-import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { useHistory, useParams, useLocation } from "react-router-dom";
 import { encodeString } from "../../lib/stringEncoder";
 import RecordsList from "../RecordsList/RecordsList";
-import { useSelector } from "react-redux";
 
 export default () => {
   const [title, setTitle] = useState("Test post, please ignore.");
   const [description, setDescription] = useState("This is definitely a test post. Please definitely ignore it!");
   const [records, setRecords] = useState([]);
-  const history = useHistory();
+  const [isEdit, setIsEdit] = useState(false);
   const userData = useSelector((state) => state.user);
+  const history = useHistory();
+  const location = useLocation();
+  const params = useParams();
 
   useEffect(() => {
     if (!userData.id) history.push("/");
   }, [history, userData]);
+
+  useEffect(() => {
+    setIsEdit(location.pathname !== "/create");
+  }, [location]);
 
   const uploadPost = async () => {
     // compress records before sending them
     const compressed = encodeString(records);
     const res = await Axios.post("/api/post", { title, description, records: compressed });
     history.push(`/post/${res.data.postID}`);
+  };
+
+  const updatePost = async () => {
+    // compress records before sending them
+    const compressed = encodeString(records);
+    await Axios.put("/api/post", { title, description, records: compressed });
+    history.push(`/post/${params.postID}`);
   };
 
   return (
@@ -30,7 +44,7 @@ export default () => {
         <input placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)} />
       </section>
       <RecordsList editable={true} setRecords={setRecords} />
-      <button onClick={uploadPost}>Post</button>
+      <button onClick={isEdit ? updatePost : uploadPost}>Post</button>
     </main>
   );
 };

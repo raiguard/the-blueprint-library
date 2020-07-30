@@ -75,6 +75,7 @@ module.exports = {
   },
   edit: async (req, res) => {
     // TODO delete old records
+    res.sendStatus(200);
   },
   delete: async (req, res) => {
     const db = req.app.get("db");

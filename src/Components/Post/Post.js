@@ -46,7 +46,12 @@ export default () => {
             <p>{postData.likes}</p>
           </section>
           <RecordsList defaultRecords={postData.records} />
-          {userData && postData.author_id === userData.id && <button onClick={deletePost}>Delete</button>}
+          {userData && postData.author_id === userData.id && (
+            <section className="buttons">
+              <button onClick={() => history.push(`/edit/${postID}`)}>Edit</button>
+              <button onClick={deletePost}>Delete</button>
+            </section>
+          )}
         </>
       ) : (
         <label>Loading post...</label>
