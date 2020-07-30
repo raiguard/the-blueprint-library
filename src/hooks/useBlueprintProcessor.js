@@ -83,8 +83,8 @@ const readRecord = (raw) => {
 };
 
 // hook
-const useBlueprintProcessor = () => {
-  const [records, setRecords] = useState([]);
+const useBlueprintProcessor = (defaultRecords) => {
+  const [records, setRecords] = useState(defaultRecords);
 
   const addRecord = (string) => {
     let raw = undefined;

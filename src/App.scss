@@ -126,8 +126,10 @@ button:focus {
   -webkit-font-smoothing: antialiased;
 }
 
-@import "./Components//CreatePost/CreatePost";
+@import "./Components/About/About";
+@import "./Components/CreatePost/CreatePost";
 @import "./Components/Home/Home";
 @import "./Components/Nav/Nav";
 @import "./Components/Record/Record";
+@import "./Components/RecordsList/RecordsList";
 @import "./Components/Post/Post";

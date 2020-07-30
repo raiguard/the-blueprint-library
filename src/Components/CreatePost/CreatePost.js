@@ -1,24 +1,13 @@
 import Axios from "axios";
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import useBlueprintProcessor from "../../hooks/useBlueprintProcessor";
-import sampleStrings from "../../sampleStrings";
-import Record from "../Record/Record";
+import RecordsList from "../RecordsList/RecordsList";
 
 export default () => {
   const [title, setTitle] = useState("Test post, please ignore.");
   const [description, setDescription] = useState("This is definitely a test post. Please definitely ignore it!");
-  const [string, setString] = useState(sampleStrings.book);
-  const [records, addRecord, removeRecord] = useBlueprintProcessor();
+  const [records, setRecords] = useState([]);
   const history = useHistory();
-
-  const addRecordToPost = () => {
-    const status = addRecord(string);
-    if (status.error) {
-      // TODO inline warnings, not alerts
-      alert(status.error);
-    }
-  };
 
   const uploadPost = async () => {
     const res = await Axios.post("/api/post", { title, description, records });
@@ -30,14 +19,8 @@ export default () => {
       <section className="textfield">
         <input placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} />
         <input placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)} />
-        <input placeholder="Input string..." value={string} onChange={(e) => setString(e.target.value)} />
-        <button onClick={addRecordToPost}>Add</button>
       </section>
-      <section className="listing">
-        {records.map((record, i) => (
-          <Record key={i} data={record} index={i} remove={removeRecord} />
-        ))}
-      </section>
+      <RecordsList editable={true} setRecords={setRecords} />
       <button onClick={uploadPost}>Post</button>
     </main>
   );

@@ -70,8 +70,10 @@ module.exports = {
     try {
       const dbRes = await db.post.get_one(+postID);
 
-      if (dbRes[0]) res.status(200).send(dbRes[0]);
-      else res.status(400).send("Post does not exist");
+      if (dbRes[0]) {
+        dbRes[0].records = [];
+        res.status(200).send(dbRes[0]);
+      } else res.status(400).send("Post does not exist");
     } catch {
       res.status(400).send("Post does not exist");
     }

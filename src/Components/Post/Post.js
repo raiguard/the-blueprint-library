@@ -1,6 +1,7 @@
 import Axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import RecordsList from "../RecordsList/RecordsList";
 
 export default () => {
   const [postData, setPostData] = useState(null);
@@ -31,6 +32,7 @@ export default () => {
             <h2>{postData.author_id}</h2>
             <p>{postData.description}</p>
           </section>
+          <RecordsList defaultRecords={postData.records} />
         </>
       ) : (
         <label>Loading post...</label>
