@@ -13,7 +13,7 @@ const fields = [
   "book_id"
 ];
 
-// recursively adds all records in the records table to the database
+// recursively add all records in the records table to the database
 const addRecords = async (db, records, postID, bookID) => {
   // records must be added from the top down, so book IDs can be gotten
   records.forEach(async (record) => {
@@ -36,6 +36,21 @@ const addRecords = async (db, records, postID, bookID) => {
     // add all children
     if (children) await addRecords(db, children, postID, dbRes[0].id);
   });
+};
+
+// recursively retrieve all records from the database
+const getRecords = async (db, postID, bookID) => {
+  let records = await db.record.get({ postID, bookID });
+  // wrap in Promise.all() to wait for all promises in the array to be resolved before continuing
+  await Promise.all(
+    records.map(async (record) => {
+      // retrieve and set children if necessary
+      if (record.type === "book") record.children = await getRecords(db, postID, record.id);
+      return record;
+    })
+  );
+
+  return records;
 };
 
 module.exports = {
@@ -63,17 +78,21 @@ module.exports = {
     // todo delete post records
   },
   getOne: async (req, res) => {
-    // TODO get post records
     const db = req.app.get("db");
     const { postID } = req.params;
 
     try {
       const dbRes = await db.post.get_one(+postID);
+      let postData = dbRes[0];
 
-      if (dbRes[0]) {
-        dbRes[0].records = [];
-        res.status(200).send(dbRes[0]);
-      } else res.status(400).send("Post does not exist");
+      if (!postData) {
+        res.status(400).send("Post does not exist");
+      }
+
+      // get records
+      postData.records = await getRecords(db, +postID, null);
+
+      res.status(200).send(postData);
     } catch {
       res.status(400).send("Post does not exist");
     }
