@@ -1,5 +1,6 @@
 import Axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { decodeString } from "../../lib/stringEncoder";
 import RecordsList from "../RecordsList/RecordsList";
@@ -9,6 +10,7 @@ export default () => {
   const history = useHistory();
   const params = useParams();
   const postID = +params.postID;
+  const userData = useSelector((state) => state.user);
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -43,7 +45,7 @@ export default () => {
             <p>{postData.description}</p>
           </section>
           <RecordsList defaultRecords={postData.records} />
-          <button onClick={deletePost}>Delete</button>
+          {userData && postData.author_id === userData.id && <button onClick={deletePost}>Delete</button>}
         </>
       ) : (
         <label>Loading post...</label>
