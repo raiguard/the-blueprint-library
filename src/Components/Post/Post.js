@@ -39,10 +39,11 @@ export default () => {
     <main className="post">
       {postData ? (
         <>
-          <section>
+          <section className="details">
             <h1>{postData.title}</h1>
-            <h2>{postData.author_id}</h2>
+            <p>{postData.author_name}</p>
             <p>{postData.description}</p>
+            <p>{postData.likes}</p>
           </section>
           <RecordsList defaultRecords={postData.records} />
           {userData && postData.author_id === userData.id && <button onClick={deletePost}>Delete</button>}

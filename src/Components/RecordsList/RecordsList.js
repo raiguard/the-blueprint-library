@@ -22,7 +22,7 @@ export default ({ editable, defaultRecords, setRecords }) => {
   };
 
   return (
-    <section className="listing">
+    <section className="records-list">
       {records.map((record, i) => (
         <Record key={i} data={record} index={i} remove={editable ? removeRecord : null} />
       ))}

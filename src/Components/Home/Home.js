@@ -27,7 +27,7 @@ export default () => {
               <h1>{post.title}</h1>
               <p>{post.description}</p>
               <p>Likes: {post.likes}</p>
-              <p>By {post.author_username}</p>
+              <p>By {post.author_name}</p>
             </Link>
           ))
         ) : (

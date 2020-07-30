@@ -1,14 +1,20 @@
 import Axios from "axios";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { encodeString } from "../../lib/stringEncoder";
 import RecordsList from "../RecordsList/RecordsList";
+import { useSelector } from "react-redux";
 
 export default () => {
   const [title, setTitle] = useState("Test post, please ignore.");
   const [description, setDescription] = useState("This is definitely a test post. Please definitely ignore it!");
   const [records, setRecords] = useState([]);
   const history = useHistory();
+  const userData = useSelector((state) => state.user);
+
+  useEffect(() => {
+    if (!userData.id) history.push("/");
+  }, [history, userData]);
 
   const uploadPost = async () => {
     // compress records before sending them
