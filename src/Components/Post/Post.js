@@ -1,11 +1,12 @@
 import Axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { decodeString } from "../../lib/stringEncoder";
 import RecordsList from "../RecordsList/RecordsList";
 
 export default () => {
   const [postData, setPostData] = useState(null);
+  const history = useHistory();
   const params = useParams();
   const postID = +params.postID;
 
@@ -27,6 +28,11 @@ export default () => {
     fetchPost();
   }, [postID]);
 
+  const deletePost = async () => {
+    await Axios.delete(`/api/post/${postID}`);
+    history.push("/");
+  };
+
   return (
     <main className="post">
       {postData ? (
@@ -37,6 +43,7 @@ export default () => {
             <p>{postData.description}</p>
           </section>
           <RecordsList defaultRecords={postData.records} />
+          <button onClick={deletePost}>Delete</button>
         </>
       ) : (
         <label>Loading post...</label>

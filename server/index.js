@@ -36,6 +36,7 @@ app.post("/auth/register", authCtrl.register);
 app.post("/auth/signin", authCtrl.signIn);
 app.post("/auth/signout", authCtrl.signOut);
 
+app.delete("/api/post/:postID", postCtrl.delete);
 app.get("/api/post/:postID", postCtrl.getOne);
 app.get("/api/posts", postCtrl.getAll);
 app.post("/api/post", postCtrl.create);

@@ -77,7 +77,16 @@ module.exports = {
     // TODO delete old records
   },
   delete: async (req, res) => {
-    // todo delete post records
+    const db = req.app.get("db");
+    const { postID } = req.params;
+
+    // delete records
+    await db.record.delete_post(+postID);
+
+    // delete post
+    await db.post.delete(+postID);
+
+    res.sendStatus(200);
   },
   getOne: async (req, res) => {
     const db = req.app.get("db");
