@@ -3,8 +3,7 @@
   position: fixed;
   width: 100vw;
   height: $nav-height;
-  display: flex;
-  justify-content: center;
+  align-items: stretch;
 }
 
 nav {

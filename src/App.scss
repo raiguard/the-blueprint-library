@@ -64,6 +64,7 @@ main,
 section {
   display: flex;
   flex-direction: row;
+  align-items: flex-start;
   max-width: 100%;
 }
 
