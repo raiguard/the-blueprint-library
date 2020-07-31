@@ -1,0 +1,11 @@
+.about {
+  flex-direction: column;
+}
+
+.about p {
+  margin: 1rem 0;
+}
+
+.about a {
+  @extend %link-font;
+}
