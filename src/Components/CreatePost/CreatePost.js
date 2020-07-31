@@ -48,7 +48,7 @@ export default () => {
   const updatePost = async () => {
     // compress records before sending them
     const compressed = encodeString(records);
-    await Axios.put("/api/post", { title, description, records: compressed });
+    await Axios.put(`/api/post/${params.postID}`, { title, description, records: compressed });
     history.push(`/post/${params.postID}`);
   };
 

@@ -40,7 +40,7 @@ app.delete("/api/post/:postID", postCtrl.delete);
 app.get("/api/post/:postID", postCtrl.getOne);
 app.get("/api/posts", postCtrl.getAll);
 app.post("/api/post", postCtrl.create);
-app.put("/api/post", postCtrl.edit);
+app.put("/api/post/:postID", postCtrl.edit);
 
 // listen
 app.listen(SERVER_PORT, () => console.log(`Server started on port ${SERVER_PORT}`));
