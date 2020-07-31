@@ -30,11 +30,6 @@ export default () => {
     fetchPost();
   }, [postID]);
 
-  const deletePost = async () => {
-    await Axios.delete(`/api/post/${postID}`);
-    history.push("/");
-  };
-
   return (
     <main className="post">
       {postData ? (
@@ -49,7 +44,6 @@ export default () => {
           {userData && postData.author_id === userData.id && (
             <section className="buttons">
               <button onClick={() => history.push(`/edit/${postID}`)}>Edit</button>
-              <button onClick={deletePost}>Delete</button>
             </section>
           )}
         </>

@@ -38,18 +38,43 @@ export default () => {
     setIsEdit(newIsEdit);
   }, [location, params.postID]);
 
+  const validateInput = () => {
+    if (title.length === 0) {
+      alert("Cannot have an empty title.");
+      return false;
+    } else if (description.length === 0) {
+      alert("Cannot have an empty description.");
+      return false;
+    } else if (records.length === 0) {
+      alert("Must have at least one record.");
+      return false;
+    }
+    return true;
+  };
+
   const uploadPost = async () => {
-    // compress records before sending them
-    const compressed = encodeString(records);
-    const res = await Axios.post("/api/post", { title, description, records: compressed });
-    history.push(`/post/${res.data.postID}`);
+    // check inputs
+    if (validateInput()) {
+      // compress records before sending them
+      const compressed = encodeString(records);
+      const res = await Axios.post("/api/post", { title, description, records: compressed });
+      history.push(`/post/${res.data.postID}`);
+    }
   };
 
   const updatePost = async () => {
-    // compress records before sending them
-    const compressed = encodeString(records);
-    await Axios.put(`/api/post/${params.postID}`, { title, description, records: compressed });
-    history.push(`/post/${params.postID}`);
+    // check inputs
+    if (validateInput()) {
+      // compress records before sending them
+      const compressed = encodeString(records);
+      await Axios.put(`/api/post/${params.postID}`, { title, description, records: compressed });
+      history.push(`/post/${params.postID}`);
+    }
+  };
+
+  const deletePost = async () => {
+    await Axios.delete(`/api/post/${params.postID}`);
+    history.push("/");
   };
 
   return (
@@ -62,6 +87,7 @@ export default () => {
           </section>
           <RecordsList defaultRecords={records} editable={true} setRecords={setRecords} />
           <button onClick={isEdit ? updatePost : uploadPost}>Post</button>
+          {isEdit && <button onClick={deletePost}>Delete</button>}
         </>
       ) : (
         <label>Loading post...</label>
