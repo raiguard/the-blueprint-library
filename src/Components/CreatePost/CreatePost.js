@@ -2,7 +2,7 @@ import Axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useHistory, useParams, useLocation } from "react-router-dom";
-import { encodeString } from "../../lib/stringEncoder";
+import { decodeString, encodeString } from "../../lib/stringEncoder";
 import RecordsList from "../RecordsList/RecordsList";
 
 export default () => {
@@ -10,6 +10,7 @@ export default () => {
   const [description, setDescription] = useState("This is definitely a test post. Please definitely ignore it!");
   const [records, setRecords] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
   const userData = useSelector((state) => state.user);
   const history = useHistory();
   const location = useLocation();
@@ -20,8 +21,22 @@ export default () => {
   }, [history, userData]);
 
   useEffect(() => {
-    setIsEdit(location.pathname !== "/create");
-  }, [location]);
+    setIsLoaded(false);
+    const newIsEdit = location.pathname !== "/create";
+    if (newIsEdit) {
+      // fetch post information
+      const fetchPost = async () => {
+        const res = await Axios.get(`/api/post/${params.postID}`);
+        const postData = res.data;
+        setTitle(postData.title);
+        setDescription(postData.description);
+        setRecords(decodeString(postData.records));
+        setIsLoaded(true);
+      };
+      fetchPost();
+    } else setIsLoaded(true);
+    setIsEdit(newIsEdit);
+  }, [location, params.postID]);
 
   const uploadPost = async () => {
     // compress records before sending them
@@ -39,12 +54,18 @@ export default () => {
 
   return (
     <main className="create-post">
-      <section className="textfield">
-        <input placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} />
-        <input placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)} />
-      </section>
-      <RecordsList editable={true} setRecords={setRecords} />
-      <button onClick={isEdit ? updatePost : uploadPost}>Post</button>
+      {isLoaded ? (
+        <>
+          <section className="textfield">
+            <input placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} />
+            <input placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)} />
+          </section>
+          <RecordsList defaultRecords={records} editable={true} setRecords={setRecords} />
+          <button onClick={isEdit ? updatePost : uploadPost}>Post</button>
+        </>
+      ) : (
+        <label>Loading post...</label>
+      )}
     </main>
   );
 };
