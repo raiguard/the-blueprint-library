@@ -1,8 +1,11 @@
+const comment = require("./controllers/comment");
+
 require("dotenv").config();
 const express = require("express"),
   session = require("express-session"),
   massive = require("massive"),
   authCtrl = require("./controllers/auth"),
+  commentCtrl = require("./controllers/comment"),
   postCtrl = require("./controllers/post"),
   { CONNECTION_STRING, SERVER_PORT, SESSION_SECRET } = process.env,
   app = express();
@@ -36,11 +39,15 @@ app.post("/auth/register", authCtrl.register);
 app.post("/auth/signin", authCtrl.signIn);
 app.post("/auth/signout", authCtrl.signOut);
 
-app.delete("/api/post/:postID", postCtrl.delete);
+app.delete("/api/post/:postID", commentCtrl.deletePost, postCtrl.delete);
 app.get("/api/post/:postID", postCtrl.getOne);
 app.get("/api/posts", postCtrl.getAll);
 app.post("/api/post", postCtrl.create);
 app.put("/api/post/:postID", postCtrl.update);
+
+app.get("/api/comments/:postID", commentCtrl.getPost);
+app.post("/api/comment", commentCtrl.add);
+app.delete("/api/comment/:commentID", commentCtrl.delete);
 
 // listen
 app.listen(SERVER_PORT, () => console.log(`Server started on port ${SERVER_PORT}`));

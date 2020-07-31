@@ -1,7 +1,28 @@
-.post .details {
+.post {
   flex-direction: column;
 }
 
+.post .details {
+  flex-direction: inherit;
+}
+
 .post .buttons {
-  flex-direction: column;
+  flex-direction: inherit;
+}
+
+.post .comments {
+  flex-direction: inherit;
+}
+
+.post .comments h1 {
+  @extend %bold-font;
+  font-size: 1.25rem;
+}
+
+.post .comments h2 {
+  @extend %bold-font;
+}
+
+.post .compose-comment {
+  flex-direction: inherit;
 }

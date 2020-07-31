@@ -1,6 +1,4 @@
 .record {
-  padding: 1rem;
-  flex-direction: column;
-  background-color: $light-background-color;
+  @extend %content-card;
   margin: 1rem;
 }
