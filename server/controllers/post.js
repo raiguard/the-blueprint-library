@@ -73,20 +73,6 @@ module.exports = {
     await addRecords(db, stringEncoder.decode(records), postID);
     res.status(200).send({ postID });
   },
-  edit: async (req, res) => {
-    const db = req.app.get("db");
-    const { title, description, records } = req.body;
-    const { postID } = req.params;
-    // get current timestamp
-    const timestamp = Math.floor(Date.now() / 1000);
-    // delete all old records
-    await db.record.delete_post(postID);
-    // update post information
-    await db.post.update({ id: postID, title, description, timestamp });
-    // add all new records
-    await addRecords(db, stringEncoder.decode(records), postID);
-    res.sendStatus(200);
-  },
   delete: async (req, res) => {
     const db = req.app.get("db");
     const { postID } = req.params;
@@ -126,5 +112,19 @@ module.exports = {
     const dbRes = await db.post.get_all(query);
 
     res.status(200).send(dbRes);
+  },
+  update: async (req, res) => {
+    const db = req.app.get("db");
+    const { title, description, records } = req.body;
+    const { postID } = req.params;
+    // get current timestamp
+    const timestamp = Math.floor(Date.now() / 1000);
+    // delete all old records
+    await db.record.delete_post(postID);
+    // update post information
+    await db.post.update({ id: postID, title, description, timestamp });
+    // add all new records
+    await addRecords(db, stringEncoder.decode(records), postID);
+    res.sendStatus(200);
   }
 };
