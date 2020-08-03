@@ -108,11 +108,14 @@ module.exports = {
   },
   getAll: async (req, res) => {
     const db = req.app.get("db");
-    const { query } = req.query;
+    const { query, userID } = req.query;
 
-    const dbRes = await db.post.get_all(query);
-
-    res.status(200).send(dbRes);
+    try {
+      const dbRes = await db.post.get_all({ query, userID });
+      res.status(200).send(dbRes);
+    } catch (err) {
+      console.log(err);
+    }
   },
   update: async (req, res) => {
     const db = req.app.get("db");
