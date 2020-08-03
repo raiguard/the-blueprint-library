@@ -1,20 +1,68 @@
 import Axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
+import { useDropzone } from "react-dropzone";
 import { useSelector } from "react-redux";
-import { useHistory, useParams, useLocation } from "react-router-dom";
+import { useHistory, useLocation, useParams } from "react-router-dom";
 import { decodeString, encodeString } from "../../lib/stringEncoder";
 import RecordsList from "../RecordsList/RecordsList";
+import { v4 as randomString } from "uuid";
 
 export default () => {
   const [title, setTitle] = useState("Test post, please ignore.");
   const [description, setDescription] = useState("This is definitely a test post. Please definitely ignore it!");
+  const [imgUrl, setImgUrl] = useState(null);
   const [records, setRecords] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [isUploading, setIsUploading] = useState(false);
   const userData = useSelector((state) => state.user);
   const history = useHistory();
   const location = useLocation();
   const params = useParams();
+
+  const onDropAccepted = useCallback(async ([file]) => {
+    setIsUploading(true);
+
+    const fileName = `${randomString()}-${file.name.replace(/\s/g, "-")}`;
+
+    try {
+      const res = await Axios.get("/api/sign-s3", {
+        params: {
+          fileName,
+          fileType: file.type
+        }
+      });
+      const { signedRequest, url } = res.data;
+      const options = {
+        headers: {
+          "Content-Type": file.type
+        }
+      };
+
+      try {
+        await Axios.put(signedRequest, file, options);
+        setIsUploading(false);
+        setImgUrl(url);
+      } catch (err) {
+        setIsUploading(false);
+        console.log(signedRequest);
+        console.log(err.toJSON());
+        alert(`ERROR: ${err.status}\n ${err.stack}`);
+      }
+    } catch (err) {
+      console.log(err.toJSON());
+    }
+  }, []);
+
+  const onDropRejected = useCallback((files) => {
+    console.log(files);
+  }, []);
+
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    accept: "image/*",
+    onDropAccepted,
+    onDropRejected
+  });
 
   useEffect(() => {
     if (!userData.id) history.push("/");
@@ -84,6 +132,11 @@ export default () => {
           <section className="textfield">
             <input placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} />
             <input placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)} />
+            <div {...getRootProps()}>
+              <input {...getInputProps()} />
+              {isDragActive ? <p>Drop image here...</p> : <p>Drag and drop image here, or click to select file</p>}
+            </div>
+            <img src={imgUrl} alt="Post img" />
           </section>
           <RecordsList defaultRecords={records} editable={true} setRecords={setRecords} />
           <button onClick={isEdit ? updatePost : uploadPost}>Post</button>

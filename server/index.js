@@ -7,6 +7,7 @@ const express = require("express"),
   authCtrl = require("./controllers/auth"),
   commentCtrl = require("./controllers/comment"),
   postCtrl = require("./controllers/post"),
+  s3Ctrl = require("./controllers/s3"),
   { CONNECTION_STRING, SERVER_PORT, SESSION_SECRET } = process.env,
   app = express();
 
@@ -48,6 +49,8 @@ app.put("/api/post/:postID", postCtrl.update);
 app.get("/api/comments/:postID", commentCtrl.getPost);
 app.post("/api/comment", commentCtrl.add);
 app.delete("/api/comment/:commentID", commentCtrl.delete);
+
+app.get("/api/sign-s3", s3Ctrl.sign);
 
 // listen
 app.listen(SERVER_PORT, () => console.log(`Server started on port ${SERVER_PORT}`));
