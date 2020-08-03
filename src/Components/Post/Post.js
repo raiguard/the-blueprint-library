@@ -64,6 +64,7 @@ export default () => {
             <p>{postData.author_name}</p>
             <p>{postData.description}</p>
             <p>{postData.likes}</p>
+            <img src={postData.img} alt="Preview" />
           </section>
           <RecordsList defaultRecords={postData.records} />
           {userData && postData.author_id === userData.id && (

@@ -1,7 +1,7 @@
 update posts
 set
   title = ${title},
-  -- img = ${img},
+  img = ${img},
   description = ${description},
   edited_timestamp = ${timestamp}
 where id = ${id};

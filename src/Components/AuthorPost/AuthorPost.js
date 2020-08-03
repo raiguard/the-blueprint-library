@@ -10,7 +10,7 @@ import { v4 as randomString } from "uuid";
 export default () => {
   const [title, setTitle] = useState("Test post, please ignore.");
   const [description, setDescription] = useState("This is definitely a test post. Please definitely ignore it!");
-  const [imgUrl, setImgUrl] = useState(null);
+  const [img, setImg] = useState("");
   const [records, setRecords] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -42,11 +42,9 @@ export default () => {
       try {
         await Axios.put(signedRequest, file, options);
         setIsUploading(false);
-        setImgUrl(url);
+        setImg(url);
       } catch (err) {
         setIsUploading(false);
-        console.log(signedRequest);
-        console.log(err.toJSON());
         alert(`ERROR: ${err.status}\n ${err.stack}`);
       }
     } catch (err) {
@@ -93,6 +91,9 @@ export default () => {
     } else if (description.length === 0) {
       alert("Cannot have an empty description.");
       return false;
+    } else if (img.length === 0) {
+      alert("Must have an image.");
+      return false;
     } else if (records.length === 0) {
       alert("Must have at least one record.");
       return false;
@@ -105,7 +106,7 @@ export default () => {
     if (validateInput()) {
       // compress records before sending them
       const compressed = encodeString(records);
-      const res = await Axios.post("/api/post", { title, description, records: compressed });
+      const res = await Axios.post("/api/post", { title, img, description, records: compressed });
       history.push(`/post/${res.data.postID}`);
     }
   };
@@ -115,7 +116,7 @@ export default () => {
     if (validateInput()) {
       // compress records before sending them
       const compressed = encodeString(records);
-      await Axios.put(`/api/post/${params.postID}`, { title, description, records: compressed });
+      await Axios.put(`/api/post/${params.postID}`, { title, img, description, records: compressed });
       history.push(`/post/${params.postID}`);
     }
   };
@@ -136,7 +137,7 @@ export default () => {
               <input {...getInputProps()} />
               {isDragActive ? <p>Drop image here...</p> : <p>Drag and drop image here, or click to select file</p>}
             </div>
-            <img src={imgUrl} alt="Post img" />
+            <img src={img} alt="Post img" />
           </section>
           <RecordsList defaultRecords={records} editable={true} setRecords={setRecords} />
           <button onClick={isEdit ? updatePost : uploadPost}>Post</button>

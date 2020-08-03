@@ -58,7 +58,7 @@ const getRecords = async (db, postID, bookID) => {
 module.exports = {
   create: async (req, res) => {
     const db = req.app.get("db");
-    const { title, description, records } = req.body;
+    const { title, img, description, records } = req.body;
     const { userID: authorID } = req.session;
     // get current timestamp
     const timestamp = Math.floor(Date.now() / 1000);
@@ -66,6 +66,7 @@ module.exports = {
     const dbRes = await db.post.create({
       authorID,
       title,
+      img,
       description,
       timestamp
     });
@@ -115,14 +116,14 @@ module.exports = {
   },
   update: async (req, res) => {
     const db = req.app.get("db");
-    const { title, description, records } = req.body;
+    const { title, img, description, records } = req.body;
     const { postID } = req.params;
     // get current timestamp
     const timestamp = Math.floor(Date.now() / 1000);
     // delete all old records
     await db.record.delete_post(postID);
     // update post information
-    await db.post.update({ id: postID, title, description, timestamp });
+    await db.post.update({ id: postID, title, img, description, timestamp });
     // add all new records
     await addRecords(db, stringEncoder.decode(records), postID);
     res.sendStatus(200);

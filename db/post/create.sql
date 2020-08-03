@@ -1,14 +1,14 @@
 insert into posts (
   author_id,
   title,
-  -- img,
+  img,
   description,
   likes,
   created_timestamp
 ) values (
   ${authorID},
   ${title},
-  -- ${img},
+  ${img},
   ${description},
   0,
   ${timestamp}
