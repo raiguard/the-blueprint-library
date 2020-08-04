@@ -1,3 +1,3 @@
-select id, username, is_admin
+select id, username, avatar, is_admin
 from users
 where id = $1;

@@ -3,40 +3,42 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
 export default () => {
+  const [loaded, setLoaded] = useState(false);
   const [userInfo, setUserInfo] = useState(null);
   const [posts, setPosts] = useState(null);
   const { userID } = useParams();
 
-  // WHERE YOU ARE:
-  // getAll endpoint is failing somewhere, check debug console
-  // Potentially extract grid view into a separate component?
-
   useEffect(() => {
     const fetchData = async () => {
+      const userRes = await Axios.get(`/api/user/${userID}`);
+      setUserInfo(userRes.data);
       const postsRes = await Axios.get("/api/posts", { params: { query: "", userID } });
       setPosts(postsRes.data);
+      setLoaded(true);
     };
     fetchData();
   }, [userID]);
 
   return (
     <main className="profile">
-      <section className="details">
-        <section className="grid-view">
-          {posts ? (
-            posts.map((post, i) => (
+      {loaded ? (
+        <section className="details">
+          <h1>{userInfo.username}</h1>
+          <img src={userInfo.avatar} alt="Avatar" />
+          <section className="grid-view">
+            {posts.map((post, i) => (
               <Link key={i} className="post-card" to={`/post/${post.id}`}>
                 <h1>{post.title}</h1>
                 <p>{post.description}</p>
                 <p>Likes: {post.likes}</p>
                 <p>By {post.author_name}</p>
               </Link>
-            ))
-          ) : (
-            <label>Loading posts...</label>
-          )}
+            ))}
+          </section>
         </section>
-      </section>
+      ) : (
+        <label>Loading...</label>
+      )}
     </main>
   );
 };

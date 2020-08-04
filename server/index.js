@@ -1,5 +1,3 @@
-const comment = require("./controllers/comment");
-
 require("dotenv").config();
 const express = require("express"),
   session = require("express-session"),
@@ -8,6 +6,7 @@ const express = require("express"),
   commentCtrl = require("./controllers/comment"),
   postCtrl = require("./controllers/post"),
   s3Ctrl = require("./controllers/s3"),
+  userCtrl = require("./controllers/user"),
   { CONNECTION_STRING, SERVER_PORT, SESSION_SECRET } = process.env,
   app = express();
 
@@ -49,6 +48,8 @@ app.put("/api/post/:postID", postCtrl.update);
 app.get("/api/comments/:postID", commentCtrl.getPost);
 app.post("/api/comment", commentCtrl.add);
 app.delete("/api/comment/:commentID", commentCtrl.delete);
+
+app.get("/api/user/:userID", userCtrl.getOne);
 
 app.get("/api/sign-s3", s3Ctrl.sign);
 
