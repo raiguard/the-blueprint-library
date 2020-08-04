@@ -11,10 +11,10 @@
 - Comment on posts
 - Edit or delete your comments
 - Copy blueprint strings to the clipboard
-- Like a post and/or save it for later
 
 ### Extra
 
+- Like a post and/or save it for later
 - "Follow" posts to receive notifications on an update
 - Use the blueprint renderer to auto-generate screenshots for the blueprints
 - Mod support

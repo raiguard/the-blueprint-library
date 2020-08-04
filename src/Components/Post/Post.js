@@ -1,7 +1,7 @@
 import Axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { useHistory, useParams } from "react-router-dom";
+import { Link, useHistory, useParams } from "react-router-dom";
 import { decodeString } from "../../lib/stringEncoder";
 import RecordsList from "../RecordsList/RecordsList";
 
@@ -61,9 +61,8 @@ export default () => {
         <>
           <section className="details">
             <h1>{postData.title}</h1>
-            <p>{postData.author_name}</p>
+            <Link to={`/profile/${postData.author_id}`}>{postData.author_name}</Link>
             <p>{postData.description}</p>
-            <p>{postData.likes}</p>
             <img src={postData.img} alt="Preview" />
           </section>
           <RecordsList defaultRecords={postData.records} />

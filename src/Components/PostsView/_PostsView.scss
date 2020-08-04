@@ -1,0 +1,19 @@
+.posts-view {
+  justify-content: center;
+}
+
+.grid-view {
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 60%;
+}
+
+.post-card {
+  @extend %content-card;
+  flex-direction: column;
+  width: 47%;
+}
+
+.post-card h1 {
+  @extend %bold-font;
+}
