@@ -5,15 +5,55 @@
 .grid-view {
   flex-wrap: wrap;
   justify-content: space-between;
-  width: 60%;
+  width: 70%;
 }
 
 .post-card {
   @extend %content-card;
-  flex-direction: column;
+  // justify-content: space-around;
   width: 47%;
+}
+
+.post-card:hover {
+  background-color: $button-hover-color;
+}
+
+.post-card:active {
+  background-color: $button-click-color;
+}
+
+.post-card .right-column {
+  flex-direction: column;
+  margin-left: 1rem;
+}
+
+.post-card .img-container {
+  width: 7rem;
+  height: 7rem;
 }
 
 .post-card h1 {
   @extend %bold-font;
+}
+
+.post-card:hover h1 {
+  color: #000000;
+}
+
+.post-card p {
+  margin-top: 0.5rem;
+}
+
+.post-card p a {
+  display: inline;
+}
+
+.post-card a {
+  @extend %link-font;
+}
+
+.post-card:hover p,
+.post-card:hover span,
+.post-card:hover a {
+  color: #000000;
 }

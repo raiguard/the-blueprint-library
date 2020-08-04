@@ -19,9 +19,15 @@ export default ({ query, userID }) => {
         {posts ? (
           posts.map((post, i) => (
             <Link key={i} className="post-card" to={`/post/${post.id}`}>
-              <h1>{post.title}</h1>
-              <p>{post.description}</p>
-              <p>By {post.author_name}</p>
+              <div className="img-container">
+                <img src={post.img} alt="Post preview" />
+              </div>
+              <div className="right-column">
+                <h1>{post.title}</h1>
+                <p>
+                  By <Link to={`/profile/${post.author_id}`}>{post.author_name}</Link>
+                </p>
+              </div>
             </Link>
           ))
         ) : (
