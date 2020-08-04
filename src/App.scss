@@ -148,6 +148,7 @@ button:focus {
   object-fit: cover;
   overflow: hidden;
   position: relative;
+  z-index: 0;
 }
 
 .app {
