@@ -59,18 +59,35 @@ export default () => {
     <main className="post">
       {postData ? (
         <>
-          <section className="details">
-            <h1>{postData.title}</h1>
-            <Link to={`/profile/${postData.author_id}`}>{postData.author_name}</Link>
-            <p>{postData.description}</p>
-            <img src={postData.img} alt="Preview" />
-          </section>
-          <RecordsList defaultRecords={postData.records} />
-          {userData && postData.author_id === userData.id && (
-            <section className="buttons">
-              <button onClick={() => history.push(`/edit/${postID}`)}>Edit</button>
+          <section className="upper-part">
+            <section className="left-column">
+              <div className="content-card">
+                <div className="img-container">
+                  <img src={postData.img} alt="Preview" />
+                  <div className="overlay" />
+                </div>
+              </div>
+              <div className="content-card metadata">
+                <dl>
+                  <dt>Author:</dt>
+                  <dd>
+                    <Link to={`/profile/${postData.author_id}`}>{postData.author_name}</Link>
+                  </dd>
+                </dl>
+              </div>
             </section>
-          )}
+            <section className="right-column">
+              <section className="content-card details">
+                <h1>{postData.title}</h1>
+                <p>{postData.description}</p>
+              </section>
+              <section className="content-card records">
+                <div className="inset-panel">
+                  <RecordsList defaultRecords={postData.records} />
+                </div>
+              </section>
+            </section>
+          </section>
           <section className="comments">
             {postData ? (
               <>
@@ -81,6 +98,11 @@ export default () => {
                     <textarea value={comment} onChange={(e) => setComment(e.target.value)} />
                     <button onClick={postComment}>Comment</button>
                   </div>
+                )}
+                {userData && postData.author_id === userData.id && (
+                  <section className="buttons">
+                    <button onClick={() => history.push(`/edit/${postID}`)}>Edit</button>
+                  </section>
                 )}
                 {comments.map((comment, i) => (
                   <div key={i} className="comment">

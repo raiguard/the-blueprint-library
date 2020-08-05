@@ -80,7 +80,8 @@ a {
 div,
 main,
 section,
-a {
+a,
+dl {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
@@ -148,6 +149,23 @@ button:focus {
   outline: 0;
 }
 
+dl {
+  box-shadow: inset 0 2px 2px -2px #000, inset 0 2px 2px -2px #000, inset 0 0 2px 0 #33302f, inset 0 0 2px 0 #33302f,
+    inset 0 -2px 2px -2px #fff, 0 0 2px 0 #2b2b2b;
+  justify-content: space-between;
+  align-items: stretch;
+  padding: 0.2rem 0.1rem;
+  width: 100%;
+}
+
+dt,
+dd {
+  box-shadow: inset 0 0 4px 0 #2d2d2d, 0 -2px 2px -2px #888, 0 -2px 2px -2px #888, -2px 0 2px -2px #000,
+    2px 0 2px -2px #000, 0 2px 2px -2px #000;
+  padding: 0.25rem 0.6rem 0.3rem;
+  width: 50%;
+}
+
 .img-container {
   box-shadow: inset 0 0 3px 0 #000, 0 -2px 2px -1px #000, -2px 0 2px -2px #28221f, -2px 0 2px -2px #28221f,
     2px 0 2px -2px #28221f, 2px 0 2px -2px #28221f, 0 3px 3px -3px #8f8c8b, 0 2px 2px -2px #8f8c8b,
@@ -175,6 +193,17 @@ button:focus {
   z-index: 5;
   width: 100%;
   height: 100%;
+}
+
+.content-card {
+  @extend %content-card;
+}
+
+.inset-panel {
+  background-color: $toolbar-background-color;
+  box-shadow: inset 0 0 3px 0 #000, 0 -2px 2px -1px #000, -2px 0 2px -2px #28221f, -2px 0 2px -2px #28221f,
+    2px 0 2px -2px #28221f, 2px 0 2px -2px #28221f, 0 3px 3px -3px #8f8c8b, 0 2px 2px -2px #8f8c8b,
+    0 1px 1px -1px #8f8c8b;
 }
 
 .app {

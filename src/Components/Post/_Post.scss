@@ -2,9 +2,60 @@
   flex-direction: column;
 }
 
+.post a {
+  @extend %link-font;
+}
+
+.post h1 {
+  @extend %bold-font;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.post dt {
+  font-weight: 500;
+}
+
+.post .content-card {
+  min-width: 100%;
+}
+
+.post .upper-part {
+  width: 100%;
+  justify-content: flex-start;
+}
+
+.post .left-column {
+  flex-direction: column;
+  margin-right: 0.5rem;
+  width: 35%;
+}
+
+.post .left-column .img-container {
+  min-width: 100%;
+}
+
+.post .metadata {
+  margin-top: 1rem;
+}
+
+.post .right-column {
+  width: 65%;
+  margin-left: 0.5rem;
+  flex-direction: column;
+}
+
 .post .details {
-  @extend %content-card;
   flex-direction: inherit;
+}
+
+.post .records {
+  margin-top: 1rem;
+}
+
+.post .records .inset-panel {
+  width: 100%;
 }
 
 .post .buttons {

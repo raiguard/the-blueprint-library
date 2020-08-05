@@ -1,10 +1,19 @@
 .record {
   @extend %content-card;
   flex-direction: column;
-  margin: 1rem;
+  margin: 0.1rem;
+  width: 99.555%;
+}
+
+.record .inset-panel {
+  width: 100%;
+}
+
+.record h1 {
+  @extend %bold-font;
+  font-size: 1rem;
 }
 
 .record .children-container {
-  background-color: $toolbar-background-color;
   flex-direction: column;
 }
