@@ -22,16 +22,18 @@ export default ({ editable, defaultRecords, setRecords }) => {
   };
 
   return (
-    <section className="records-list">
-      {records.map((record, i) => (
-        <Record key={i} data={record} index={i} remove={editable ? removeRecord : null} />
-      ))}
-      {editable && (
-        <>
-          <input placeholder="Input string..." value={string} onChange={(e) => setString(e.target.value)} />
-          <button onClick={addRecordToList}>Add</button>
-        </>
-      )}
+    <section className="content-card records-list">
+      <div className="inset-panel records-container">
+        {records.map((record, i) => (
+          <Record key={i} data={record} index={i} remove={editable ? removeRecord : null} />
+        ))}
+        {editable && (
+          <div className="record">
+            <input placeholder="Input string..." value={string} onChange={(e) => setString(e.target.value)} />
+            <button onClick={addRecordToList}>Add</button>
+          </div>
+        )}
+      </div>
     </section>
   );
 };

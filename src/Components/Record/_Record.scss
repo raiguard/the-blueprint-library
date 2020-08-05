@@ -5,18 +5,36 @@
 
 .record {
   @extend %content-card;
-  flex-direction: column;
   margin: 0.1rem;
-  width: 99.5555%;
+  width: 100%;
+  align-items: center;
+  padding: 0.5rem;
 }
 
 .record h1 {
   @extend %bold-font;
   font-size: 1rem;
+  margin: 0.225rem 0.5rem;
+  padding-bottom: 0.1rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .record-container .children-container {
   flex-direction: column;
-  width: calc(99.91% - 2.5rem);
+  width: calc(100% - 2.5rem);
   margin-left: 2.5rem;
+}
+
+.record .copy-button {
+  margin-left: auto;
+}
+
+.record .copied {
+  margin-left: auto;
+}
+
+.record input {
+  width: auto;
 }

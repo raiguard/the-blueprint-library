@@ -1,4 +1,10 @@
 .records-list {
+  margin-top: 1rem;
+  flex-direction: column;
+  width: 100%;
+}
+
+.records-list .records-container {
   flex-direction: column;
   width: 100%;
 }

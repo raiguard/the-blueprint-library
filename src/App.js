@@ -1,3 +1,6 @@
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { far } from "@fortawesome/free-regular-svg-icons";
+import { fas } from "@fortawesome/free-solid-svg-icons";
 import Axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
@@ -5,6 +8,8 @@ import "./App.css";
 import Nav from "./Components/Nav/Nav";
 import { setUser } from "./redux/reducer";
 import routes from "./routes";
+
+library.add(far, fas);
 
 export default () => {
   const [sessionChecked, setSessionChecked] = useState(false);

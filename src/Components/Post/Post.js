@@ -81,11 +81,7 @@ export default () => {
                 <h1>{postData.title}</h1>
                 <p>{postData.description}</p>
               </section>
-              <section className="content-card records">
-                <div className="inset-panel">
-                  <RecordsList defaultRecords={postData.records} />
-                </div>
-              </section>
+              <RecordsList defaultRecords={postData.records} />
             </section>
           </section>
           <section className="comments">
