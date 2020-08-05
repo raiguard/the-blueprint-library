@@ -57,6 +57,10 @@ $nav-height: 2.25rem;
   background-color: $light-background-color;
   padding: 0.75rem;
   box-shadow: 0.15rem 0.15rem 0.1rem 0.1rem #0000002d;
+}
+
+%content-card-with-margin {
+  @extend %content-card;
   margin: 0.5rem;
 }
 
@@ -132,11 +136,10 @@ button:focus {
 }
 
 .img-container {
-  box-shadow: inset 0 0 4px 0 #171717;
-  justify-content: center;
-  align-items: center;
+  box-shadow: inset 0 0 3px 0 #000, 0 -2px 2px -1px #000, -2px 0 2px -2px #28221f, -2px 0 2px -2px #28221f,
+    2px 0 2px -2px #28221f, 2px 0 2px -2px #28221f, 0 3px 3px -3px #8f8c8b, 0 2px 2px -2px #8f8c8b,
+    0 1px 1px -1px #8f8c8b;
   overflow: hidden;
-  z-index: 100;
   pointer-events: none;
   position: relative;
 }
@@ -149,6 +152,16 @@ button:focus {
   overflow: hidden;
   position: relative;
   z-index: 0;
+}
+
+.img-container .overlay {
+  box-shadow: inset 0 0 4px 0 #171717;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  width: 100%;
+  height: 100%;
 }
 
 .app {

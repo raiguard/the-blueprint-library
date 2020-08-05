@@ -9,7 +9,7 @@
 }
 
 .post-card {
-  @extend %content-card;
+  @extend %content-card-with-margin;
   // justify-content: space-around;
   width: 47%;
 }

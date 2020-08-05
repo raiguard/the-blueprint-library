@@ -21,6 +21,7 @@ export default ({ query, userID }) => {
             <Link key={i} className="post-card" to={`/post/${post.id}`}>
               <div className="img-container">
                 <img src={post.img} alt="Post preview" />
+                <div className="overlay" />
               </div>
               <div className="right-column">
                 <h1>{post.title}</h1>

@@ -3,6 +3,7 @@
 }
 
 .post .details {
+  @extend %content-card;
   flex-direction: inherit;
 }
 
