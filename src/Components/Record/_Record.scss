@@ -1,12 +1,13 @@
+.record-container {
+  flex-direction: column;
+  width: 100%;
+}
+
 .record {
   @extend %content-card;
   flex-direction: column;
   margin: 0.1rem;
-  width: 99.555%;
-}
-
-.record .inset-panel {
-  width: 100%;
+  width: 99.5555%;
 }
 
 .record h1 {
@@ -14,6 +15,8 @@
   font-size: 1rem;
 }
 
-.record .children-container {
+.record-container .children-container {
   flex-direction: column;
+  width: calc(99.91% - 2.5rem);
+  margin-left: 2.5rem;
 }
