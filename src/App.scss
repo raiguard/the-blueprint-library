@@ -36,13 +36,6 @@ $nav-height: 2.25rem;
   font-weight: 500;
 }
 
-%limited-width-container {
-  margin: 0 auto;
-  max-width: 75rem;
-  position: relative;
-  width: 75rem;
-}
-
 %link-font {
   color: #80cef0;
   text-decoration: none;
@@ -88,7 +81,8 @@ div,
 main,
 section,
 a,
-dl {
+dl,
+nav {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
@@ -96,7 +90,7 @@ dl {
 }
 
 main {
-  @extend %limited-width-container;
+  @extend .limited-width-container;
   margin: calc(#{$nav-height} + 1rem) auto;
 }
 
@@ -274,6 +268,14 @@ dd {
   font-size: 1.1rem;
 }
 
+.limited-width-container {
+  margin: 0 auto;
+  padding: 0 1rem;
+  max-width: 75rem;
+  position: relative;
+  width: 75rem;
+}
+
 .app {
   @extend %main-font;
   background-color: $main-background-color;
@@ -282,6 +284,12 @@ dd {
   width: 100vw;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
+}
+
+@media (max-width: 480px) {
+  .limited-width-container {
+    width: 95%;
+  }
 }
 
 @import "./Components/About/About";

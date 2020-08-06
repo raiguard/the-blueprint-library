@@ -28,11 +28,13 @@ const Record = ({ data, index, remove }) => {
           </div>
         )}
         <label>{name}</label>
-        {isCopied && <label className="copied">Copied!</label>}
-        <div className="inset-panel button-inset copy-button">
-          <button className="icon-button" onClick={setCopied} title="Copy to clipboard">
-            <FontAwesomeIcon icon={["far", "clipboard"]} transform="up-3.5" />
-          </button>
+        <div className="copy-button-container">
+          {isCopied && <label className="copied">Copied!</label>}
+          <div className="inset-panel button-inset copy-button">
+            <button className="icon-button" onClick={setCopied} title="Copy to clipboard">
+              <FontAwesomeIcon icon={["far", "clipboard"]} transform="up-3.5" />
+            </button>
+          </div>
         </div>
       </div>
       {children && children.length > 0 && (
