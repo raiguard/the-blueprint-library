@@ -27,6 +27,14 @@ $button-click-color: #f1be64;
 
 $nav-height: 2.25rem;
 
+.limited-width-container {
+  margin: 0 auto;
+  padding: 0 1rem;
+  max-width: 75rem;
+  position: relative;
+  width: 75rem;
+}
+
 %main-font {
   color: #ffffff;
 }
@@ -266,14 +274,6 @@ dd {
   justify-content: center;
   align-items: center;
   font-size: 1.1rem;
-}
-
-.limited-width-container {
-  margin: 0 auto;
-  padding: 0 1rem;
-  max-width: 75rem;
-  position: relative;
-  width: 75rem;
 }
 
 .app {

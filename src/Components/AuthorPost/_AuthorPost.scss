@@ -52,3 +52,17 @@
 .author-post .red-button {
   margin-left: 1rem;
 }
+
+@media (max-width: 480px) {
+  .author-post .details {
+    flex-direction: column;
+  }
+  .author-post .img-container {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+  .author-post .right-column {
+    width: 100%;
+    margin: 0;
+  }
+}

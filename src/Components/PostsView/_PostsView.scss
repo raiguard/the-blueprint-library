@@ -58,3 +58,22 @@
 .post-card:hover a {
   color: #000000;
 }
+
+@media (max-width: 768px) {
+  .grid-view {
+    width: 90%;
+  }
+  .post-card {
+    width: 45%;
+  }
+}
+
+@media (max-width: 480px) {
+  .grid-view {
+    width: 90%;
+  }
+  .post-card {
+    width: 100%;
+    margin: 0.5rem 0;
+  }
+}
