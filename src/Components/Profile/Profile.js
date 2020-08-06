@@ -10,7 +10,7 @@ export default () => {
   useEffect(() => {
     const fetchUserData = async () => {
       const res = await Axios.get(`/api/user/${userID}`);
-      setUserInfo(res);
+      setUserInfo(res.data);
     };
     fetchUserData();
   });
@@ -18,11 +18,16 @@ export default () => {
   return (
     <main className="profile">
       {userInfo ? (
-        <section className="details">
-          <h1>{userInfo.username}</h1>
-          <img src={userInfo.avatar} alt="Avatar" />
+        <>
+          <section className="content-card details">
+            <div className="img-container">
+              <img src={userInfo.avatar} alt="Avatar" />
+              <div className="overlay" />
+            </div>
+            <h1>{userInfo.username}</h1>
+          </section>
           <PostsView userID={+userID} />
-        </section>
+        </>
       ) : (
         <label>Loading...</label>
       )}

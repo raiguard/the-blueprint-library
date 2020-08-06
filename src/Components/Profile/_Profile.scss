@@ -1,0 +1,20 @@
+.profile {
+  flex-direction: column;
+}
+
+.profile .details {
+  width: 68.6%;
+  margin: auto;
+  margin-bottom: 1rem;
+}
+
+.profile .details h1 {
+  @extend %bold-font;
+  margin-left: 1rem;
+  font-size: 1.5rem;
+}
+
+.profile .details .img-container {
+  width: 10rem;
+  height: 10rem;
+}
