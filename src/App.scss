@@ -118,6 +118,10 @@ textarea::placeholder {
   color: #00000081;
 }
 
+textarea {
+  font-family: $main-font-family;
+}
+
 button {
   cursor: pointer;
   background-color: #8e8e8e;
@@ -153,6 +157,8 @@ button:focus {
   background-color: #5eb663;
   box-shadow: inset 8px 0 4px -8px #000, inset 0 10px 2px -8px #95df99, inset 0 10px 2px -8px #163218,
     inset 0 -9px 2px -8px #000, 0 0 4px 0 #000;
+  font-size: 1rem;
+  font-weight: 600;
 }
 
 .green-button:hover {
@@ -167,6 +173,28 @@ button:focus {
     inset 8px 0 4px -8px #3f5024, inset 0 9px 2px -8px #3f5024, inset 0 -9px 2px -8px #3f5024,
     inset 0 -8.5px 0 -8px #3f5024, 0 0 4px 0 #000;
   background-color: #cfdf93;
+}
+
+.red-button {
+  background-color: #fe5a5a;
+  box-shadow: inset 8px 0 4px -8px #000, inset -8px 0 4px -8px #000, inset 0 10px 2px -8px #fda1a1,
+    inset 0 10px 2px -8px #8b0101, inset 0 -9px 2px -8px #000, 0 0 4px 0 #000;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.red-button:hover {
+  box-shadow: inset 8px 0 4px -8px #000, inset -8px 0 4px -8px #000, inset 0 9px 2px -8px #f8eaea,
+    inset 0 8px 4px -8px #000, inset 0 -8px 4px -8px #000, inset 0 -9px 2px -8px #432400, 0 0 4px 0 #000,
+    inset 0 0 4px 2px #c35353;
+  background-color: #ff9b9b;
+}
+
+.red-button:active {
+  box-shadow: inset 0 10px 2px -8px #000, inset 0 9px 2px -8px #000, inset 8px 0 4px -8px #642323,
+    inset 8px 0 4px -8px #642323, inset -8px 0 4px -8px #642323, inset -8px 0 4px -8px #642323,
+    inset 0 9px 2px -8px #642323, inset 0 -9px 2px -8px #642323, inset 0 -8.5px 0 -8px #642323, 0 0 4px 0 #000;
+  background-color: #fca8a8;
 }
 
 dl {

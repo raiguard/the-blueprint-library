@@ -56,7 +56,7 @@ export default () => {
     console.log(files);
   }, []);
 
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+  const { getRootProps, getInputProps } = useDropzone({
     accept: "image/*",
     onDropAccepted,
     onDropRejected
@@ -76,6 +76,7 @@ export default () => {
         const postData = res.data;
         setTitle(postData.title);
         setDescription(postData.description);
+        setImg(postData.img);
         setRecords(decodeString(postData.records));
         setIsLoaded(true);
       };
@@ -127,23 +128,37 @@ export default () => {
   };
 
   return (
-    <main className="create-post">
+    <main className="author-post">
       {isLoaded ? (
         <>
-          <section className="textfield">
-            <input placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} />
-            <input placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)} />
-            <div {...getRootProps()}>
-              <input {...getInputProps()} />
-              {isDragActive ? <p>Drop image here...</p> : <p>Drag and drop image here, or click to select file</p>}
+          <section className="content-card details">
+            <div className="img-container">
+              <div className="dropzone" {...getRootProps()}>
+                <input {...getInputProps()} />
+                {img ? <img src={img} alt="Post img" /> : <p>Drop image here</p>}
+                <div className="overlay" />
+              </div>
             </div>
-            <img src={img} alt="Post img" />
+            <div className="right-column">
+              <input placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} />
+              <textarea
+                placeholder="Description"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+              />
+            </div>
           </section>
           <RecordsList defaultRecords={records} editable={true} setRecords={setRecords} />
-          <button className="green-button" onClick={isEdit ? updatePost : uploadPost}>
-            Post
-          </button>
-          {isEdit && <button onClick={deletePost}>Delete</button>}
+          <div className="buttons-row">
+            <button className="green-button" onClick={isEdit ? updatePost : uploadPost}>
+              {isEdit ? "Update" : "Post"}
+            </button>
+            {isEdit && (
+              <button className="red-button" onClick={deletePost}>
+                Delete
+              </button>
+            )}
+          </div>
         </>
       ) : (
         <label>Loading post...</label>

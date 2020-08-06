@@ -8,3 +8,12 @@
   flex-direction: column;
   width: 100%;
 }
+
+.author-record {
+  justify-content: space-between;
+}
+
+.author-record input {
+  width: 95%;
+  margin-right: 0.5rem;
+}

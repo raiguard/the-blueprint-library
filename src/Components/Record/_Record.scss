@@ -11,9 +11,9 @@
   padding: 0.5rem;
 }
 
-.record h1 {
-  @extend %bold-font;
-  font-size: 1rem;
+.record label {
+  font-size: 0.9rem;
+  font-weight: 500;
   margin: 0.225rem 0.5rem;
   padding-bottom: 0.1rem;
   white-space: nowrap;

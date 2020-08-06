@@ -1,14 +1,54 @@
-.create-post {
+.author-post {
   flex-direction: column;
   align-items: center;
 }
 
-.create-post .textfield {
-  justify-content: center;
+.author-post .details {
   width: 100%;
 }
 
-.create-post .textfield input {
-  padding: 0.5rem;
-  width: 60%;
+.author-post .right-column {
+  flex-direction: column;
+  margin-left: 1rem;
+  align-items: stretch;
+  width: calc(70% - 1rem);
+}
+
+.author-post .right-column textarea {
+  margin-top: 0.5rem;
+  resize: none;
+  height: 14rem;
+}
+
+.author-post .img-container {
+  width: 30%;
+  height: 16rem;
+  pointer-events: initial;
+  justify-content: center;
+  align-items: center;
+}
+
+.author-post .dropzone {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+}
+
+.author-post .dropzone img {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.author-post .buttons-row {
+  justify-content: flex-end;
+  width: 100%;
+  padding: 1rem;
+}
+
+.author-post .red-button {
+  margin-left: 1rem;
 }

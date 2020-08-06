@@ -28,7 +28,7 @@ export default ({ editable, defaultRecords, setRecords }) => {
           <Record key={i} data={record} index={i} remove={editable ? removeRecord : null} />
         ))}
         {editable && (
-          <div className="record">
+          <div className="record author-record">
             <input placeholder="Input string..." value={string} onChange={(e) => setString(e.target.value)} />
             <button onClick={addRecordToList}>Add</button>
           </div>

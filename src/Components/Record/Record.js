@@ -6,7 +6,7 @@ const Record = ({ data, index, remove }) => {
   const [showChildren, setShowChildren] = useState(false);
   const [isCopied, setCopied] = useCopyClipboard(data.string, { successDuration: 2000 });
 
-  const { type, name, description, string, children } = data;
+  const { type, name, children } = data;
   return (
     <div className="record-container">
       <div className="record">
@@ -27,8 +27,7 @@ const Record = ({ data, index, remove }) => {
             </button>
           </div>
         )}
-        <h1>{name}</h1>
-        <p>{description}</p>
+        <label>{name}</label>
         {isCopied && <label className="copied">Copied!</label>}
         <div className="inset-panel button-inset copy-button">
           <button className="icon-button" onClick={setCopied} title="Copy to clipboard">
