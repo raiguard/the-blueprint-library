@@ -211,6 +211,8 @@ GET "/api/record/:recordid"
 - Hosted: 10
 - Picture-perfect presentation: 10
 
+Total: 90 / 100
+
 ## Wireframes
 
 ### Home / Search

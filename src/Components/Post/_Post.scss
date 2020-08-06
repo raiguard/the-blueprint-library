@@ -36,6 +36,11 @@
   min-width: 100%;
 }
 
+.post .left-column .edit-button {
+  width: 100%;
+  margin-top: 1rem;
+}
+
 .post .metadata {
   margin-top: 1rem;
 }
@@ -56,6 +61,7 @@
 
 .post .comments {
   flex-direction: inherit;
+  margin-top: 1rem;
 }
 
 .post .comments h1 {
@@ -65,8 +71,62 @@
 
 .post .comments h2 {
   @extend %bold-font;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 .post .compose-comment {
   flex-direction: inherit;
+  width: 100%;
+}
+
+.post .comments textarea {
+  resize: none;
+  width: 100%;
+  height: 10rem;
+}
+
+.post .compose-comment .button-row {
+  margin-top: 0.5rem;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.post .comment {
+  @extend %content-card-in-inset-panel;
+  padding-left: 0.5rem;
+}
+
+.post .comment .img-container {
+  width: 4.5rem;
+  height: 4.5rem;
+}
+
+.post .comment .comment-column {
+  flex-direction: column;
+  margin-left: 0.6rem;
+}
+
+.post .comment .comment-right-column {
+  width: 100%;
+}
+
+.post .comment .comment-column button {
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+.post .comment .comment-column h2 {
+  margin-top: 0;
+}
+
+.post .comments .inset-panel {
+  width: 100%;
+  margin-top: 0.3rem;
+  flex-direction: column;
+}
+
+.post .comments .comment-content-area {
+  width: 100%;
+  height: 8rem;
 }

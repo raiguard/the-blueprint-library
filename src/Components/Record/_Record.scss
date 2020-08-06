@@ -4,11 +4,8 @@
 }
 
 .record {
-  @extend %content-card;
-  margin: 0.1rem;
-  width: 100%;
+  @extend %content-card-in-inset-panel;
   align-items: center;
-  padding: 0.5rem;
 }
 
 .record label {

@@ -68,6 +68,13 @@ $nav-height: 2.25rem;
   margin: 0.5rem;
 }
 
+%content-card-in-inset-panel {
+  @extend %content-card;
+  margin: 0.1rem;
+  width: 100%;
+  padding: 0.5rem;
+}
+
 * {
   box-sizing: border-box;
 }

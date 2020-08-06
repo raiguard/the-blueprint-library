@@ -45,13 +45,14 @@ app.get("/api/posts", postCtrl.getAll);
 app.post("/api/post", postCtrl.create);
 app.put("/api/post/:postID", postCtrl.update);
 
+app.delete("/api/comment/:commentID", commentCtrl.delete);
 app.get("/api/comments/:postID", commentCtrl.getPost);
 app.post("/api/comment", commentCtrl.add);
-app.delete("/api/comment/:commentID", commentCtrl.delete);
-
-app.get("/api/user/:userID", userCtrl.getOne);
+app.put("/api/comment/:commentID", commentCtrl.edit);
 
 app.get("/api/sign-s3", s3Ctrl.sign);
+
+app.get("/api/user/:userID", userCtrl.getOne);
 
 // listen
 app.listen(SERVER_PORT, () => console.log(`Server started on port ${SERVER_PORT}`));

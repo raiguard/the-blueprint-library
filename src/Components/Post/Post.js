@@ -14,6 +14,8 @@ export default () => {
   const userData = useSelector((state) => state.user);
 
   const [comment, setComment] = useState("");
+  const [editingCommentID, setEditingCommentID] = useState(null);
+  const [editingComment, setEditingComment] = useState(null);
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -50,6 +52,13 @@ export default () => {
     await updateComments();
   };
 
+  const updateComment = async () => {
+    const res = await Axios.put(`/api/comment/${editingCommentID}`, { content: editingComment });
+    setEditingComment(null);
+    setEditingCommentID(null);
+    await updateComments();
+  };
+
   const deleteComment = async (ID) => {
     await Axios.delete(`/api/comment/${ID}`);
     await updateComments();
@@ -75,39 +84,80 @@ export default () => {
                   </dd>
                 </dl>
               </div>
+              {userData && postData.author_id === userData.id && (
+                <button className="edit-button" onClick={() => history.push(`/edit/${postID}`)}>
+                  Edit
+                </button>
+              )}
             </section>
             <section className="right-column">
               <section className="content-card details">
                 <h1>{postData.title}</h1>
                 <p>{postData.description}</p>
               </section>
-              <RecordsList defaultRecords={postData.records} />
             </section>
           </section>
-          <section className="comments">
+          <RecordsList defaultRecords={postData.records} />
+          <section className="content-card comments">
             {postData ? (
               <>
-                <h1>Comments</h1>
+                <h1>Comments ({comments.length})</h1>
+                <div className="inset-panel">
+                  {comments.map((comment, i) => (
+                    <div key={i} className="comment">
+                      <div className="comment-column">
+                        <div className="img-container">
+                          <img src={comment.author_avatar} alt="Avatar" />
+                          <div className="overlay" />
+                        </div>
+                        {editingCommentID !== comment.id ? (
+                          comment.author_id === userData.id && (
+                            <button
+                              onClick={() => {
+                                setEditingCommentID(comment.id);
+                                setEditingComment(comment.content);
+                              }}
+                            >
+                              Edit
+                            </button>
+                          )
+                        ) : (
+                          <>
+                            <button className="green-button" onClick={() => updateComment(comment.id)}>
+                              Update
+                            </button>
+                            <button className="red-button" onClick={() => deleteComment(comment.id)}>
+                              Delete
+                            </button>
+                          </>
+                        )}
+                      </div>
+                      <div className="comment-column comment-right-column">
+                        <h2>{comment.author_name}</h2>
+                        {editingCommentID === comment.id ? (
+                          <textarea
+                            className="comment-content-area"
+                            value={editingComment}
+                            onChange={(e) => setEditingComment(e.target.value)}
+                          />
+                        ) : (
+                          <label>{comment.content}</label>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
                 {userData.id && (
                   <div className="compose-comment">
                     <h2>Write a comment</h2>
                     <textarea value={comment} onChange={(e) => setComment(e.target.value)} />
-                    <button onClick={postComment}>Comment</button>
+                    <div className="button-row">
+                      <button className="green-button" onClick={postComment}>
+                        Comment
+                      </button>
+                    </div>
                   </div>
                 )}
-                {userData && postData.author_id === userData.id && (
-                  <section className="buttons">
-                    <button onClick={() => history.push(`/edit/${postID}`)}>Edit</button>
-                  </section>
-                )}
-                {comments.map((comment, i) => (
-                  <div key={i} className="comment">
-                    <label>{comment.content}</label>
-                    {comment.author_id === userData.id && (
-                      <button onClick={() => deleteComment(comment.id)}>Delete</button>
-                    )}
-                  </div>
-                ))}
               </>
             ) : (
               <label>Loading comments...</label>
