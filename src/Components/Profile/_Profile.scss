@@ -18,3 +18,14 @@
   width: 10rem;
   height: 10rem;
 }
+
+@media (max-width: 480px) {
+  .profile .details {
+    width: 90%;
+  }
+
+  .profile .details .img-container {
+    width: 7rem;
+    height: 7rem;
+  }
+}
