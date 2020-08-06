@@ -30,10 +30,11 @@ nav label {
 }
 
 .auth {
+  @extend %content-card;
+  padding: 0.5rem;
   position: absolute;
   right: 0;
   top: $nav-height;
-  background-color: $toolbar-background-color;
   box-sizing: border-box;
   flex-direction: column;
 }

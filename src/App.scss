@@ -149,6 +149,26 @@ button:focus {
   outline: 0;
 }
 
+.green-button {
+  background-color: #5eb663;
+  box-shadow: inset 8px 0 4px -8px #000, inset 0 10px 2px -8px #95df99, inset 0 10px 2px -8px #163218,
+    inset 0 -9px 2px -8px #000, 0 0 4px 0 #000;
+}
+
+.green-button:hover {
+  filter: brightness(1.3);
+  background-color: #5eb663;
+  box-shadow: inset 8px 0 4px -8px #000, inset 0 10px 2px -8px #95df99, inset 0 10px 2px -8px #163218,
+    inset 0 -9px 2px -8px #000, 0 0 4px 0 #000;
+}
+
+.green-button:active {
+  box-shadow: inset 0 10px 2px -8px #000, inset 0 9px 2px -8px #000, inset 8px 0 4px -8px #3f5024,
+    inset 8px 0 4px -8px #3f5024, inset 0 9px 2px -8px #3f5024, inset 0 -9px 2px -8px #3f5024,
+    inset 0 -8.5px 0 -8px #3f5024, 0 0 4px 0 #000;
+  background-color: #cfdf93;
+}
+
 dl {
   box-shadow: inset 0 2px 2px -2px #000, inset 0 2px 2px -2px #000, inset 0 0 2px 0 #33302f, inset 0 0 2px 0 #33302f,
     inset 0 -2px 2px -2px #fff, 0 0 2px 0 #2b2b2b;

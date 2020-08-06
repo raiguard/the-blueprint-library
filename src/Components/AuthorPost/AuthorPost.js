@@ -140,7 +140,9 @@ export default () => {
             <img src={img} alt="Post img" />
           </section>
           <RecordsList defaultRecords={records} editable={true} setRecords={setRecords} />
-          <button onClick={isEdit ? updatePost : uploadPost}>Post</button>
+          <button className="green-button" onClick={isEdit ? updatePost : uploadPost}>
+            Post
+          </button>
           {isEdit && <button onClick={deletePost}>Delete</button>}
         </>
       ) : (
