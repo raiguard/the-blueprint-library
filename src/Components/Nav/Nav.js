@@ -14,7 +14,7 @@ export default () => {
   const history = useHistory();
   const location = useLocation();
 
-  const isPhone = useMediaQuery({ query: "(max-width: 480px)" });
+  const isPhone = useMediaQuery({ query: "(max-width: 768px)" });
 
   const toggleAuthType = (type) => {
     if (authType !== type) {
