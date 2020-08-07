@@ -8,6 +8,7 @@ const express = require("express"),
   s3Ctrl = require("./controllers/s3"),
   userCtrl = require("./controllers/user"),
   { CONNECTION_STRING, SERVER_PORT, SESSION_SECRET } = process.env,
+  path = require("path"),
   app = express();
 
 app.use(express.json({ limit: "50mb" }));
@@ -53,6 +54,12 @@ app.put("/api/comment/:commentID", commentCtrl.edit);
 app.get("/api/sign-s3", s3Ctrl.sign);
 
 app.get("/api/user/:userID", userCtrl.getOne);
+
+// BrowserRouter
+app.use(express.static(__dirname + "/../build"));
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../build/index.html"));
+});
 
 // listen
 app.listen(SERVER_PORT, () => console.log(`Server started on port ${SERVER_PORT}`));
