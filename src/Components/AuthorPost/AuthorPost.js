@@ -8,8 +8,8 @@ import RecordsList from "../RecordsList/RecordsList";
 import { v4 as randomString } from "uuid";
 
 export default () => {
-  const [title, setTitle] = useState("Test post, please ignore.");
-  const [description, setDescription] = useState("This is definitely a test post. Please definitely ignore it!");
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
   const [img, setImg] = useState("");
   const [records, setRecords] = useState([]);
   const [isEdit, setIsEdit] = useState(false);

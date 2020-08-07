@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import useBlueprintProcessor from "../../hooks/useBlueprintProcessor";
-import sampleStrings from "../../sampleStrings";
 import Record from "../Record/Record";
 
 export default ({ editable, defaultRecords, setRecords }) => {
-  const [string, setString] = useState(sampleStrings.book);
+  const [string, setString] = useState("");
   const [records, addRecord, removeRecord] = useBlueprintProcessor(defaultRecords || []);
 
   useEffect(() => {
