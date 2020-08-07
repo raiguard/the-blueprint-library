@@ -11,7 +11,7 @@ create table posts (
   author_id int references users(id),
   title varchar(200),
   img text,
-  description varchar(1000),
+  description varchar(10000),
   likes int,
   created_timestamp int,
   edited_timestamp int
